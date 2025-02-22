@@ -1,0 +1,271 @@
+{
+  "document": [
+    {
+      "type": "h1",
+      "content": "Header 1",
+      "bold": true,
+      "italic": false,
+      "alignment": "left"
+    },
+    {
+      "type": "h2",
+      "content": "Header 2",
+      "bold": true,
+      "italic": false,
+      "alignment": "left"
+    },
+    {
+      "type": "h3",
+      "content": "Header 3",
+      "bold": true,
+      "italic": false,
+      "alignment": "left"
+    },
+    {
+      "type": "paragraph",
+      "content": "test text",
+      "bold": false,
+      "italic": false,
+      "alignment": "left"
+    },
+    {
+      "type": "paragraph",
+      "content": "https://puginarug.com/",
+      "bold": false,
+      "italic": false,
+      "alignment": "left"
+    },
+    {
+      "type": "paragraph",
+      "content": "Colored text",
+      "bold": false,
+      "italic": false,
+      "alignment": "left"
+    },
+    {
+      "type": "paragraph",
+      "content": "diff color and highlighted",
+      "bold": false,
+      "italic": false,
+      "alignment": "left"
+    },
+    {
+      "type": "paragraph",
+      "content": "this is a bolded text",
+      "bold": true,
+      "italic": false,
+      "alignment": "left"
+    },
+    {
+      "type": "paragraph",
+      "content": "this is a italic text",
+      "bold": false,
+      "italic": true,
+      "alignment": "left"
+    },
+    {
+      "type": "paragraph",
+      "content": "this is a bulleted point",
+      "bold": false,
+      "italic": false,
+      "alignment": "left"
+    },
+    {
+      "type": "paragraph",
+      "content": "this is an indented text",
+      "bold": false,
+      "italic": false,
+      "alignment": "left"
+    },
+    {
+      "type": "paragraph",
+      "content": "numbered list 1",
+      "bold": false,
+      "italic": false,
+      "alignment": "left"
+    },
+    {
+      "type": "paragraph",
+      "content": "numbered list 2",
+      "bold": false,
+      "italic": false,
+      "alignment": "left"
+    },
+    {
+      "type": "paragraph",
+      "content": "numbers list 3 ",
+      "bold": false,
+      "italic": false,
+      "alignment": "left"
+    },
+    {
+      "type": "paragraph",
+      "content": "middle align",
+      "bold": false,
+      "italic": false,
+      "alignment": "center"
+    },
+    {
+      "type": "paragraph",
+      "content": "end align",
+      "bold": false,
+      "italic": false,
+      "alignment": "right"
+    },
+    {
+      "type": "paragraph",
+      "content": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic",
+      "bold": true,
+      "italic": false,
+      "alignment": "both"
+    },
+    {
+      "type": "paragraph",
+      "content": "^ align to margin",
+      "bold": false,
+      "italic": false,
+      "alignment": "left"
+    },
+    {
+      "type": "empty_paragraph",
+      "content": ""
+    },
+    {
+      "type": "table",
+      "content": [
+        [
+          "Hi",
+          "i",
+          "Am"
+        ],
+        [
+          "Going",
+          "To",
+          "Remod"
+        ]
+      ]
+    },
+    {
+      "type": "empty_paragraph",
+      "content": ""
+    },
+    {
+      "type": "paragraph",
+      "content": "sample text 示例文本 ",
+      "bold": false,
+      "italic": false,
+      "alignment": "left"
+    },
+    {
+      "type": "paragraph",
+      "content": "whit text here",
+      "bold": false,
+      "italic": false,
+      "alignment": "left"
+    },
+    {
+      "type": "paragraph",
+      "content": "!@#$%^&*(){}[];’:,./ \uD83E\uDD2A",
+      "bold": false,
+      "italic": false,
+      "alignment": "left"
+    },
+    {
+      "type": "paragraph",
+      "content": "font calibri here",
+      "bold": false,
+      "italic": false,
+      "alignment": "left"
+    },
+    {
+      "type": "paragraph",
+      "content": "font times new roman here",
+      "bold": false,
+      "italic": false,
+      "alignment": "left"
+    },
+    {
+      "type": "empty_paragraph",
+      "content": ""
+    },
+    {
+      "type": "paragraph",
+      "content": "diff spacing heres",
+      "bold": false,
+      "italic": false,
+      "alignment": "left"
+    },
+    {
+      "type": "paragraph",
+      "content": "line spacing",
+      "bold": false,
+      "italic": false,
+      "alignment": "left"
+    },
+    {
+      "type": "paragraph",
+      "content": "space after paragraph",
+      "bold": false,
+      "italic": false,
+      "alignment": "left"
+    },
+    {
+      "type": "empty_paragraph",
+      "content": ""
+    },
+    {
+      "type": "paragraph",
+      "content": "  <- math1",
+      "bold": false,
+      "italic": false,
+      "alignment": "left"
+    },
+    {
+      "type": "empty_paragraph",
+      "content": ""
+    },
+    {
+      "type": "paragraph",
+      "content": "\uD83D\uDE09\uD83D\uDC69☺\uD83D\uDC50\uD83D\uDC85\uD83D\uDCAA\uD83D\uDE0B\uD83D\uDE09\uD83D\uDE14\uD83D\uDE16\uD83D\uDE21\uD83D\uDE1C\uD83D\uDE0F\uD83D\uDE39\uD83D\uDCA9\uD83D\uDCA9\uD83D\uDCA9",
+      "bold": false,
+      "italic": false,
+      "alignment": "left"
+    },
+    {
+      "type": "empty_paragraph",
+      "content": ""
+    },
+    {
+      "type": "empty_paragraph",
+      "content": ""
+    },
+    {
+      "type": "empty_paragraph",
+      "content": ""
+    },
+    {
+      "type": "empty_paragraph",
+      "content": ""
+    },
+    {
+      "type": "empty_paragraph",
+      "content": ""
+    },
+    {
+      "type": "empty_paragraph",
+      "content": ""
+    },
+    {
+      "type": "empty_paragraph",
+      "content": ""
+    },
+    {
+      "type": "empty_paragraph",
+      "content": ""
+    },
+    {
+      "type": "empty_paragraph",
+      "content": ""
+    }
+  ]
+}
