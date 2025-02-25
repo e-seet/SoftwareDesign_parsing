@@ -11,7 +11,7 @@ using Utilities;
 
 namespace Utilities
 {
-	public static class formatExtractor
+	public static class FormatExtractor
 	{
 		public static string GetParagraphFont(DocumentFormat.OpenXml.Wordprocessing.Paragraph paragraph)
 		{
