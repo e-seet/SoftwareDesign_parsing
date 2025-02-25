@@ -9,6 +9,8 @@ using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Wordprocessing;
 using Utilities;
 
+using System.Drawing;
+
 class Program
 {
 	static void Main()
@@ -116,7 +118,16 @@ class Program
 
 		foreach (var element in body.Elements<OpenXmlElement>())
 		{
-			if (element is DocumentFormat.OpenXml.Wordprocessing.Paragraph paragraph)
+			// Check for a Drawing element inside the run
+			var drawing = element.Descendants<DocumentFormat.OpenXml.Wordprocessing.Drawing>().FirstOrDefault();
+			if (drawing != null)
+			{
+				Console.WriteLine("Extract Image");
+				// Extract images from the drawing
+				var imageObjects = ExtractImagesFromDrawing(doc, drawing);
+				elements.AddRange(imageObjects);
+			}
+			else if (element is DocumentFormat.OpenXml.Wordprocessing.Paragraph paragraph)
 			{
 				Console.WriteLine("Extract Paragraph");
 				elements.Add(ExtractParagraph(paragraph));
@@ -149,11 +160,26 @@ class Program
 		// List<Dictionary<string, object>> mathContent = null;
 		List<Dictionary<string, object>> mathContent = new List<Dictionary<string, object>>();
 
+		// ✅ Extract Paragraph-Level Font & Size
+		// string paraFontType = paragraph.ParagraphProperties?.ParagraphMarkRunProperties?.RunFonts?.Ascii?.Value ?? "Default Font";
+		// string paraFontSizeRaw = paragraph.ParagraphProperties?.ParagraphMarkRunProperties?.FontSize?.Val?.Value;
+		// int paraFontSize = paraFontSizeRaw != null ? int.Parse(paraFontSizeRaw) / 2 : 12; // Default to 12pt
+
+		// ✅ Extract Paragraph-Level Font & Size Correctly
+		string paraFontType = GetParagraphFont(paragraph);
+		int paraFontSize = GetParagraphFontSize(paragraph);
+
+		Console.WriteLine(paraFontSize);
+		Console.WriteLine(paraFontType);
+
 		// ✅ Check if paragraph is completely empty
 		if (string.IsNullOrWhiteSpace(text) && !paragraph.Elements<Break>().Any())
 		{
 			paragraphData["type"] = "empty_paragraph";
 			paragraphData["content"] = "";
+			paragraphData["alignment"] = alignment;
+			paragraphData["fonttype"] = paraFontType;
+			paragraphData["fontsize"] = paraFontSize;
 			return paragraphData;
 		}
 
@@ -162,6 +188,9 @@ class Program
 		{
 			paragraphData["type"] = "page_break";
 			paragraphData["content"] = "[PAGE BREAK]";
+			paragraphData["fonttype"] = paraFontType;
+			paragraphData["fontsize"] = paraFontSize;
+
 			return paragraphData;
 		}
 
@@ -170,6 +199,9 @@ class Program
 		{
 			paragraphData["type"] = "line_break";
 			paragraphData["content"] = "[LINE BREAK]";
+			paragraphData["fonttype"] = paraFontType;
+			paragraphData["fontsize"] = paraFontSize;
+
 			return paragraphData;
 		}
 
@@ -191,7 +223,10 @@ class Program
 			return new Dictionary<string, object>
 				{
 					{ "type", "page_break" },
-					{ "content", "[PAGE BREAK]" }
+					{ "content", "[PAGE BREAK]" },
+					{ "fonttype", paraFontType },
+
+
 				};
 		}
 
@@ -219,13 +254,33 @@ class Program
 
 			bool runBold = (run.RunProperties?.Bold != null);
 			bool runItalic = (run.RunProperties?.Italic != null);
+			// 	// ✅ Extract Font Type
+			// 	string fontType = run.RunProperties?.RunFonts?.Ascii?.Value ?? "Default Font";
+
+			// 	// ✅ Extract Font Size (stored in half-points, so divide by 2)
+			// 	// string fontSizeRaw = run.RunProperties?.FontSize?.Val?.Value ?? null; // else null
+			// 	string? fontSizeRaw = run.RunProperties?.FontSize?.Val?.Value;
+			// 	int fontSize = fontSizeRaw != null ? int.Parse(fontSizeRaw) / 2 : 12; // Default to 12pt
+
+
+			// 	var runPropertiesList = new List<object>
+			// {
+			// 	new Dictionary<string, object> { { "bold", runBold } },
+			// 	new Dictionary<string, object> { { "italic", runItalic } }
+			// };
+
 
 			runsList.Add(new Dictionary<string, object>
 				{
 					{ "text", runText },
 					{ "bold", runBold },
-					{ "italic", runItalic }
-				});
+					{ "italic", runItalic },
+					// { "font", fontType },
+					{ "size", fontSize },
+					{"type", paraFontType},
+					{ "metadata", runPropertiesList}
+
+		});
 		}
 
 		if (!runsList.Any())
@@ -268,6 +323,7 @@ class Program
 				{
 					{ "type", GetParagraphType(style) },
 					{ "content", text },
+
 					{ "bold", isBold },
 					{ "italic", isItalic },
 					{ "alignment", alignment },
@@ -277,6 +333,26 @@ class Program
 
 	}
 
+	static string GetParagraphFont(DocumentFormat.OpenXml.Wordprocessing.Paragraph paragraph)
+	{
+		if (paragraph.ParagraphProperties != null && paragraph.ParagraphProperties.ParagraphStyleId != null)
+		{
+			Console.WriteLine("paragraph font type" + paragraph.ParagraphProperties.ParagraphStyleId.Val?.Value + "\n");
+			return paragraph.ParagraphProperties.ParagraphStyleId.Val?.Value ?? "Default Font";
+		}
+		Console.WriteLine(paragraph.ParagraphProperties);
+		return "Default Font";
+	}
+
+	static int GetParagraphFontSize(DocumentFormat.OpenXml.Wordprocessing.Paragraph paragraph)
+	{
+		string? fontSizeRaw = paragraph.ParagraphProperties?
+			.ParagraphMarkRunProperties?
+			.Elements<FontSize>()
+			.FirstOrDefault()?.Val?.Value;
+
+		return fontSizeRaw != null ? int.Parse(fontSizeRaw) / 2 : 12; // Default 12pt
+	}
 
 	// /*
 	static Dictionary<string, object> ExtractParagraph_v2(Paragraph paragraph)
@@ -519,4 +595,136 @@ class Program
 
 	// 	return footers;
 	// }
+	// static List<Dictionary<string, object>> ExtractImages(WordprocessingDocument doc)
+	// {
+	// 	var images = new List<Dictionary<string, object>>();
+	// 	var mainPart = doc.MainDocumentPart;
+
+	// 	if (mainPart == null)
+	// 	{
+	// 		Console.WriteLine("Error: MainDocumentPart is null.");
+	// 		return images;
+	// 	}
+
+	// 	foreach (var imagePart in mainPart.ImageParts)
+	// 	{
+	// 		string relationshipId = mainPart.GetIdOfPart(imagePart);
+	// 		string fileName = $"Image_{relationshipId}.png";
+
+	// 		using (var stream = imagePart.GetStream())
+	// 		using (var fileStream = new FileStream(fileName, FileMode.Create))
+	// 		{
+	// 			stream.CopyTo(fileStream);
+	// 		}
+
+	// 		images.Add(new Dictionary<string, object>
+	// 	{
+	// 		{ "type", "image" },
+	// 		{ "filename", fileName }
+	// 	});
+	// 	}
+
+	// 	return images;
+	// }
+
+
+	// //temp commented out
+	// static List<Dictionary<string, object>> ExtractImagesFromDrawing(WordprocessingDocument doc, Drawing drawing)
+	// {
+	// 	var imageList = new List<Dictionary<string, object>>();
+
+	// 	// 1. Find the Blip element
+	// 	var blip = drawing.Descendants<DocumentFormat.OpenXml.Drawing.Blip>().FirstOrDefault();
+	// 	if (blip == null) return imageList;
+
+	// 	// 2. Relationship ID
+	// 	string? embed = blip.Embed?.Value;
+	// 	if (embed == null) return imageList;
+
+	// 	// 3. Get the ImagePart
+	// 	var mainPart = doc.MainDocumentPart;
+	// 	var imagePart = (ImagePart)mainPart.GetPartById(embed);
+	// 	if (imagePart == null) return imageList;
+
+	// 	// 4. Save the image locally
+	// 	string fileName = $"Image_{embed}.png";
+	// 	using (var stream = imagePart.GetStream())
+	// 	using (var fileStream = new FileStream(fileName, FileMode.Create))
+	// 	{
+	// 		stream.CopyTo(fileStream);
+	// 	}
+
+	// 	// 5. Add to results
+	// 	imageList.Add(new Dictionary<string, object>
+	// {
+	// 	{ "type", "image" },
+	// 	{ "filename", fileName }
+	// });
+
+	// 	return imageList;
+	// }
+
+
+	static List<Dictionary<string, object>> ExtractImagesFromDrawing(
+		WordprocessingDocument doc,
+		DocumentFormat.OpenXml.Wordprocessing.Drawing drawing)
+	{
+		var imageList = new List<Dictionary<string, object>>();
+
+		// 1. Ensure MainDocumentPart is not null
+		var mainPart = doc.MainDocumentPart;
+		if (mainPart == null)
+		{
+			Console.WriteLine("Error: MainDocumentPart is null.");
+			return imageList;
+		}
+
+		// 2. Find the Blip element
+		var blip = drawing.Descendants<DocumentFormat.OpenXml.Drawing.Blip>().FirstOrDefault();
+		if (blip == null)
+		{
+			Console.WriteLine("No Blip found in Drawing.");
+			return imageList;
+		}
+
+		// 3. Get the relationship ID (embed)
+		string? embed = blip.Embed?.Value;
+		if (string.IsNullOrEmpty(embed))
+		{
+			Console.WriteLine("Embed is null or empty.");
+			return imageList;
+		}
+
+		// 4. Retrieve the ImagePart using the relationship ID
+		var part = mainPart.GetPartById(embed);
+		if (part == null)
+		{
+			Console.WriteLine($"No part found for embed ID: {embed}");
+			return imageList;
+		}
+
+		// 5. Cast part to ImagePart
+		if (part is not ImagePart imagePart)
+		{
+			Console.WriteLine("Part is not an ImagePart.");
+			return imageList;
+		}
+
+		// 6. Save the image locally
+		string fileName = $"Image_{embed}.png";
+		using (var stream = imagePart.GetStream())
+		using (var fileStream = new FileStream(fileName, FileMode.Create))
+		{
+			stream.CopyTo(fileStream);
+		}
+
+		// 7. Add image info to the result list
+		imageList.Add(new Dictionary<string, object>
+	{
+		{ "type", "image" },
+		{ "filename", fileName }
+	});
+
+		return imageList;
+	}
 }

@@ -125,7 +125,10 @@
     },
     {
       "type": "empty_paragraph",
-      "content": ""
+      "content": "",
+      "alignment": "left",
+      "fonttype": "Default Font",
+      "fontsize": 12
     },
     {
       "type": "table",
@@ -144,7 +147,10 @@
     },
     {
       "type": "empty_paragraph",
-      "content": ""
+      "content": "",
+      "alignment": "left",
+      "fonttype": "Default Font",
+      "fontsize": 12
     },
     {
       "type": "paragraph",
@@ -183,7 +189,10 @@
     },
     {
       "type": "empty_paragraph",
-      "content": ""
+      "content": "",
+      "alignment": "left",
+      "fonttype": "Default Font",
+      "fontsize": 12
     },
     {
       "type": "paragraph",
@@ -208,7 +217,10 @@
     },
     {
       "type": "empty_paragraph",
-      "content": ""
+      "content": "",
+      "alignment": "left",
+      "fonttype": "Default Font",
+      "fontsize": 12
     },
     {
       "type": "paragraph",
@@ -219,15 +231,24 @@
     },
     {
       "type": "empty_paragraph",
-      "content": ""
+      "content": "",
+      "alignment": "left",
+      "fonttype": "Default Font",
+      "fontsize": 12
     },
     {
       "type": "empty_paragraph",
-      "content": ""
+      "content": "",
+      "alignment": "left",
+      "fonttype": "Default Font",
+      "fontsize": 12
     },
     {
       "type": "empty_paragraph",
-      "content": ""
+      "content": "",
+      "alignment": "left",
+      "fonttype": "Default Font",
+      "fontsize": 12
     },
     {
       "type": "paragraph",
@@ -238,39 +259,57 @@
     },
     {
       "type": "empty_paragraph",
-      "content": ""
+      "content": "",
+      "alignment": "left",
+      "fonttype": "Default Font",
+      "fontsize": 12
     },
     {
       "type": "empty_paragraph",
-      "content": ""
+      "content": "",
+      "alignment": "left",
+      "fonttype": "Default Font",
+      "fontsize": 12
+    },
+    {
+      "type": "image",
+      "filename": "Image_rId8.png"
     },
     {
       "type": "empty_paragraph",
-      "content": ""
+      "content": "",
+      "alignment": "left",
+      "fonttype": "Default Font",
+      "fontsize": 12
+    },
+    {
+      "type": "image",
+      "filename": "Image_rId9.png"
     },
     {
       "type": "empty_paragraph",
-      "content": ""
+      "content": "",
+      "alignment": "center",
+      "fonttype": "Default Font",
+      "fontsize": 12
     },
     {
       "type": "empty_paragraph",
-      "content": ""
+      "content": "",
+      "alignment": "left",
+      "fonttype": "Default Font",
+      "fontsize": 12
     },
     {
       "type": "empty_paragraph",
-      "content": ""
+      "content": "",
+      "alignment": "left",
+      "fonttype": "Default Font",
+      "fontsize": 12
     },
     {
-      "type": "empty_paragraph",
-      "content": ""
-    },
-    {
-      "type": "empty_paragraph",
-      "content": ""
-    },
-    {
-      "type": "empty_paragraph",
-      "content": ""
+      "type": "image",
+      "filename": "Image_rId10.png"
     }
   ]
 }

@@ -1,10 +1,18 @@
 # Current Focus
 
-Current Focus: Break if there is a change in meta type
+Added but have yet to fully check:
 
-Current tecnique to handle it: Using "runs"
+1. Current tecnique to handle it: Using "runs" [To check and confirm later when
+   drilling down to breaking into single node due to metadata]
+2. Alignment such as mid and end have been added
+3. Image can be captured as well
+4. Page break [To check and modify accordingly so that we know if it is empty
+   paragraph or page break. This is not fully done yet]
 
-## Futre
+Current Focus: To restructure the node such that metadata is all in a list
+format
+
+## Future
 
 1. Footer: not registering page number
 
@@ -16,9 +24,5 @@ Current tecnique to handle it: Using "runs"
    - bullet point
    - indented text
    - Numbered list
-   - Mid alignment
-   - end alignment
-   - page breaks
-   - image
 
 3. Format & structure of the node
