@@ -88,7 +88,6 @@ class Program
 				}
 			}
 		}
-
 		return headers;
 	}
 
@@ -130,7 +129,7 @@ class Program
 			else if (element is DocumentFormat.OpenXml.Wordprocessing.Paragraph paragraph)
 			{
 				Console.WriteLine("Extract Paragraph");
-				elements.Add(ExtractParagraph(paragraph));
+				elements.Add(ExtractParagraph(paragraph, doc));
 			}
 			else if (element is Table table)
 			{
@@ -138,15 +137,14 @@ class Program
 				elements.Add(ExtractTable(table)); // ✅ Keep table extraction as-is
 			}
 		}
-
 		return elements;
 	}
 
 	static Dictionary<string, object> ExtractParagraph(
 		DocumentFormat.OpenXml.Wordprocessing.Paragraph paragraph
+		, WordprocessingDocument doc
 	)
 	{
-
 		string text = string.Join(
 			"",
 			paragraph.Descendants<DocumentFormat.OpenXml.Wordprocessing.Text>().Select(t => t.Text)
@@ -155,31 +153,67 @@ class Program
 		bool isBold = paragraph.Descendants<Bold>().Any();
 		bool isItalic = paragraph.Descendants<Italic>().Any();
 		var alignment = paragraph.ParagraphProperties?.Justification?.Val?.ToString() ?? "left";
+
+		// ✅ Extract Font Type & Font Size from Paragraph Style
+		string fontType = "Default Font";
+		string? fontSizeRaw = null;
+
+		string styleId = paragraph.ParagraphProperties?.ParagraphStyleId?.Val?.Value ?? "Normal";
+		var stylesPart = doc.MainDocumentPart?.StyleDefinitionsPart;
+
+		// ✅ Check if StyleDefinitionsPart exists
+		if (stylesPart != null && stylesPart.Styles != null)
+		{
+			var paragraphStyle = stylesPart.Styles.Elements<Style>()
+				.FirstOrDefault(s => s.StyleId == styleId);
+
+			if (paragraphStyle != null)
+			{
+				fontType = paragraphStyle.StyleRunProperties?.RunFonts?.Ascii?.Value ?? "Default Font";
+				fontSizeRaw = paragraphStyle.StyleRunProperties?.FontSize?.Val?.Value;
+			}
+		}
+
+		// ✅ Convert font size from half-points
+		int fontSize = fontSizeRaw != null ? int.Parse(fontSizeRaw) / 2 : 12; // Default 12pt
 		var paragraphData = new Dictionary<string, object>();
+
+		paragraphData["alignment"] = alignment;
+		paragraphData["fontType"] = fontType;
+		paragraphData["fontSize"] = fontSize;
+
 		var havemath = false;
 		// List<Dictionary<string, object>> mathContent = null;
 		List<Dictionary<string, object>> mathContent = new List<Dictionary<string, object>>();
 
-		// ✅ Extract Paragraph-Level Font & Size
-		// string paraFontType = paragraph.ParagraphProperties?.ParagraphMarkRunProperties?.RunFonts?.Ascii?.Value ?? "Default Font";
-		// string paraFontSizeRaw = paragraph.ParagraphProperties?.ParagraphMarkRunProperties?.FontSize?.Val?.Value;
-		// int paraFontSize = paraFontSizeRaw != null ? int.Parse(paraFontSizeRaw) / 2 : 12; // Default to 12pt
-
 		// ✅ Extract Paragraph-Level Font & Size Correctly
-		string paraFontType = GetParagraphFont(paragraph);
-		int paraFontSize = GetParagraphFontSize(paragraph);
+		string paraFontType = formatExtractor.GetParagraphFont(paragraph);
+		int paraFontSize = formatExtractor.GetParagraphFontSize(paragraph);
 
+		var PropertiesList = new List<object>
+			{
+				new Dictionary<string, object>
+				{
+					{ "bold", isBold },
+					{ "italic", isItalic } ,
+					{ "alignment", alignment },
+					{"fontsize", fontSize},
+					{"fonttype", paraFontType},
+				},
+			};
 		Console.WriteLine(paraFontSize);
 		Console.WriteLine(paraFontType);
 
 		// ✅ Check if paragraph is completely empty
 		if (string.IsNullOrWhiteSpace(text) && !paragraph.Elements<Break>().Any())
 		{
-			paragraphData["type"] = "empty_paragraph";
+			paragraphData["type"] = "empty_paragraph1";
 			paragraphData["content"] = "";
-			paragraphData["alignment"] = alignment;
-			paragraphData["fonttype"] = paraFontType;
-			paragraphData["fontsize"] = paraFontSize;
+			paragraphData["styling"] = PropertiesList;
+
+			// paragraphData["alignment"] = alignment;
+			// paragraphData["fonttype"] = paraFontType;
+			// paragraphData["fontsize"] = paraFontSize;
 			return paragraphData;
 		}
 
@@ -188,9 +222,9 @@ class Program
 		{
 			paragraphData["type"] = "page_break";
 			paragraphData["content"] = "[PAGE BREAK]";
-			paragraphData["fonttype"] = paraFontType;
-			paragraphData["fontsize"] = paraFontSize;
-
+			// paragraphData["fonttype"] = paraFontType;
+			// paragraphData["fontsize"] = paraFontSize;
+			paragraphData["styling"] = PropertiesList;
 			return paragraphData;
 		}
 
@@ -199,8 +233,9 @@ class Program
 		{
 			paragraphData["type"] = "line_break";
 			paragraphData["content"] = "[LINE BREAK]";
-			paragraphData["fonttype"] = paraFontType;
-			paragraphData["fontsize"] = paraFontSize;
+			// paragraphData["fonttype"] = paraFontType;
+			// paragraphData["fontsize"] = paraFontSize;
+			paragraphData["styling"] = PropertiesList;
 
 			return paragraphData;
 		}
@@ -208,13 +243,11 @@ class Program
 		if (paragraph.Descendants<DocumentFormat.OpenXml.Math.OfficeMath>().Any())
 		{
 			mathContent = MathExtractor.ExtractParagraphsWithMath(paragraph);
-
 			havemath = true;
 			// var mathContent = MathExtractor.ExtractParagraphsWithMath(paragraph);
 			// elements.AddRange(MathExtractor.ExtractParagraphsWithMath(paragraph)); // ✅ Extract paragraphs & Unicode math
 			// return mathContent;
 		}
-
 
 		// Check for page/line breaks at the paragraph level
 		if (paragraph.Descendants<Break>().Any(b => b.Type?.Value == BreakValues.Page))
@@ -225,8 +258,6 @@ class Program
 					{ "type", "page_break" },
 					{ "content", "[PAGE BREAK]" },
 					{ "fonttype", paraFontType },
-
-
 				};
 		}
 
@@ -254,38 +285,26 @@ class Program
 
 			bool runBold = (run.RunProperties?.Bold != null);
 			bool runItalic = (run.RunProperties?.Italic != null);
+
 			// 	// ✅ Extract Font Type
-			// 	string fontType = run.RunProperties?.RunFonts?.Ascii?.Value ?? "Default Font";
+			string runfontType = run.RunProperties?.RunFonts?.Ascii?.Value ?? "Default Font";
 
 			// 	// ✅ Extract Font Size (stored in half-points, so divide by 2)
-			// 	// string fontSizeRaw = run.RunProperties?.FontSize?.Val?.Value ?? null; // else null
-			// 	string? fontSizeRaw = run.RunProperties?.FontSize?.Val?.Value;
-			// 	int fontSize = fontSizeRaw != null ? int.Parse(fontSizeRaw) / 2 : 12; // Default to 12pt
-
-
-			// 	var runPropertiesList = new List<object>
-			// {
-			// 	new Dictionary<string, object> { { "bold", runBold } },
-			// 	new Dictionary<string, object> { { "italic", runItalic } }
-			// };
-
+			// string fontSizeRaw = run.RunProperties?.FontSize?.Val?.Value ?? null; // else null
+			string? runFontSizeRaw = run.RunProperties?.FontSize?.Val?.Value;
+			int runFontSize = runFontSizeRaw != null ? int.Parse(runFontSizeRaw) / 2 : 12; // Default to 12pt
 
 			runsList.Add(new Dictionary<string, object>
-				{
+			{
 					{ "text", runText },
-					{ "bold", runBold },
-					{ "italic", runItalic },
-					// { "font", fontType },
-					{ "size", fontSize },
-					{"type", paraFontType},
-					{ "metadata", runPropertiesList}
-
-		});
+					{ "styling", PropertiesList}
+			});
 		}
 
 		if (!runsList.Any())
 		{
-			Console.WriteLine("No run or breaks. Maybe empty paragraph\n");
+			Console.WriteLine("No run or breaks. Maybe empty paragraph. \n");
+			Console.WriteLine("This may be creating issues. to check\n");
 			return new Dictionary<string, object>
 				{
 					{ "type", "empty_paragraph" },
@@ -309,149 +328,22 @@ class Program
 
 				return new Dictionary<string, object>
 				{
-					{ "type", GetParagraphType(style) },
+					{ "type", formatExtractor.GetParagraphType(style) },
 					{ "content", mathstring },
-					{ "bold", isBold },
-					{ "italic", isItalic },
-					{ "alignment", alignment },
+					{ "styling", PropertiesList}
 				};
 			}
 			else
 			{
-
 				return new Dictionary<string, object>
 				{
-					{ "type", GetParagraphType(style) },
+					{ "type", formatExtractor.GetParagraphType(style) },
 					{ "content", text },
+					{ "styling", PropertiesList}
 
-					{ "bold", isBold },
-					{ "italic", isItalic },
-					{ "alignment", alignment },
 				};
 			}
 		}
-
-	}
-
-	static string GetParagraphFont(DocumentFormat.OpenXml.Wordprocessing.Paragraph paragraph)
-	{
-		if (paragraph.ParagraphProperties != null && paragraph.ParagraphProperties.ParagraphStyleId != null)
-		{
-			Console.WriteLine("paragraph font type" + paragraph.ParagraphProperties.ParagraphStyleId.Val?.Value + "\n");
-			return paragraph.ParagraphProperties.ParagraphStyleId.Val?.Value ?? "Default Font";
-		}
-		Console.WriteLine(paragraph.ParagraphProperties);
-		return "Default Font";
-	}
-
-	static int GetParagraphFontSize(DocumentFormat.OpenXml.Wordprocessing.Paragraph paragraph)
-	{
-		string? fontSizeRaw = paragraph.ParagraphProperties?
-			.ParagraphMarkRunProperties?
-			.Elements<FontSize>()
-			.FirstOrDefault()?.Val?.Value;
-
-		return fontSizeRaw != null ? int.Parse(fontSizeRaw) / 2 : 12; // Default 12pt
-	}
-
-	// /*
-	static Dictionary<string, object> ExtractParagraph_v2(Paragraph paragraph)
-	{
-		// 1) Check for page/line breaks at the paragraph level
-		if (paragraph.Descendants<Break>().Any(b => b.Type?.Value == BreakValues.Page))
-		{
-			Console.WriteLine("break value\n");
-			return new Dictionary<string, object>
-				{
-					{ "type", "page_break" },
-					{ "content", "[PAGE BREAK]" }
-				};
-		}
-
-		if (paragraph.Descendants<Break>().Any(b => b.Type?.Value == BreakValues.TextWrapping))
-		{
-			Console.WriteLine("line break\n");
-			return new Dictionary<string, object>
-				{
-					{ "type", "line_break" },
-					{ "content", "[LINE BREAK]" }
-				};
-		}
-
-		// 2) Collect each run's text and formatting
-		var runsList = new List<Dictionary<string, object>>();
-
-		foreach (var run in paragraph.Elements<Run>())
-		{
-			string runText = string.Join("", run.Descendants<Text>().Select(t => t.Text));
-			if (string.IsNullOrWhiteSpace(runText))
-			{
-				Console.WriteLine("Continue\n");
-				continue; // Skip empty runs
-			}
-
-			bool runBold = (run.RunProperties?.Bold != null);
-			bool runItalic = (run.RunProperties?.Italic != null);
-
-			runsList.Add(new Dictionary<string, object>
-				{
-					{ "text", runText },
-					{ "bold", runBold },
-					{ "italic", runItalic }
-				});
-		}
-
-		// 3) If no runs and no breaks, it's likely an empty paragraph
-		if (!runsList.Any())
-		{
-			Console.WriteLine("No run or breaks. Maybe empty paragraph\n");
-			return new Dictionary<string, object>
-				{
-					{ "type", "empty_paragraph" },
-					{ "content", "" }
-				};
-		}
-
-		// 4) (Optional) If paragraph contains math, handle or store it
-		if (paragraph.Descendants<DocumentFormat.OpenXml.Math.OfficeMath>().Any())
-		{
-			Console.WriteLine("Got office math\n");
-			// Example: If you want to extract math separately, do something like:
-			// var mathSegments = MathExtractor.ExtractParagraphsWithMath(paragraph);
-			// Then merge them into your runsList or store them as a separate property.
-
-			// original code taken
-			var mathContent = MathExtractor.ExtractParagraphsWithMath(paragraph);
-
-		}
-
-		// 5) Determine the paragraph style (Heading1, Heading2, etc.)
-		string style = paragraph.ParagraphProperties?.ParagraphStyleId?.Val?.Value ?? "Normal";
-		string paragraphType = style switch
-		{
-			"Heading1" => "h1",
-			"Heading2" => "h2",
-			"Heading3" => "h3",
-			_ => "paragraph",
-		};
-
-		// 6) Return a dictionary representing this paragraph
-		return new Dictionary<string, object>
-			{
-				{ "type", paragraphType },
-				{ "runs", runsList }
-			};
-	}
-	// */
-	static string GetParagraphType(string style)
-	{
-		return style switch
-		{
-			"Heading1" => "h1",
-			"Heading2" => "h2",
-			"Heading3" => "h3",
-			_ => "paragraph",
-		};
 	}
 
 	static Dictionary<string, object> ExtractTable(Table table)
@@ -495,7 +387,6 @@ class Program
 		// 	}
 		// }
 
-
 		var footers = new List<string>();
 
 		// ✅ Check if MainDocumentPart is null
@@ -518,7 +409,8 @@ class Program
 
 			if (footer != null)
 			{
-				foreach (
+				foreach
+				(
 					var paragraph in footer.Elements<DocumentFormat.OpenXml.Wordprocessing.Paragraph>()
 				)
 				{
@@ -557,113 +449,6 @@ class Program
 
 		return footers;
 	}
-
-	// static List<string> ExtractFooters(WordprocessingDocument doc)
-	// {
-	// 	var footers = new List<string>();
-
-	// 	foreach (var footerPart in doc.MainDocumentPart.FooterParts)
-	// 	{
-	// 		var footer = footerPart.Footer;
-
-	// 		if (footer != null)
-	// 		{
-	// 			foreach (var paragraph in footer.Elements<DocumentFormat.OpenXml.Wordprocessing.Paragraph>())
-	// 			{
-	// 				// ✅ Extract normal text from the footer
-	// 				string text = string.Join("", paragraph.Descendants<DocumentFormat.OpenXml.Wordprocessing.Text>().Select(t => t.Text));
-
-	// 				// ✅ Extract FieldCode elements (e.g., { PAGE } placeholders)
-	// 				var fieldCodes = paragraph.Descendants<DocumentFormat.OpenXml.Wordprocessing.FieldCode>()
-	// 					.Select(fc => fc.Text);
-
-	// 				// ✅ Extract SimpleField elements (for dynamic content like page numbers)
-	// 				var simpleFields = paragraph.Descendants<DocumentFormat.OpenXml.Wordprocessing.SimpleField>()
-	// 					.SelectMany(sf => sf.Descendants<DocumentFormat.OpenXml.Wordprocessing.Text>())
-	// 					.Select(t => t.Text);
-
-	// 				// ✅ Combine all extracted content
-	// 				string combinedText = $"{text} {string.Join(" ", fieldCodes)} {string.Join(" ", simpleFields)}".Trim();
-
-	// 				if (!string.IsNullOrWhiteSpace(combinedText))
-	// 				{
-	// 					footers.Add(combinedText);
-	// 				}
-	// 			}
-	// 		}
-	// 	}
-
-	// 	return footers;
-	// }
-	// static List<Dictionary<string, object>> ExtractImages(WordprocessingDocument doc)
-	// {
-	// 	var images = new List<Dictionary<string, object>>();
-	// 	var mainPart = doc.MainDocumentPart;
-
-	// 	if (mainPart == null)
-	// 	{
-	// 		Console.WriteLine("Error: MainDocumentPart is null.");
-	// 		return images;
-	// 	}
-
-	// 	foreach (var imagePart in mainPart.ImageParts)
-	// 	{
-	// 		string relationshipId = mainPart.GetIdOfPart(imagePart);
-	// 		string fileName = $"Image_{relationshipId}.png";
-
-	// 		using (var stream = imagePart.GetStream())
-	// 		using (var fileStream = new FileStream(fileName, FileMode.Create))
-	// 		{
-	// 			stream.CopyTo(fileStream);
-	// 		}
-
-	// 		images.Add(new Dictionary<string, object>
-	// 	{
-	// 		{ "type", "image" },
-	// 		{ "filename", fileName }
-	// 	});
-	// 	}
-
-	// 	return images;
-	// }
-
-
-	// //temp commented out
-	// static List<Dictionary<string, object>> ExtractImagesFromDrawing(WordprocessingDocument doc, Drawing drawing)
-	// {
-	// 	var imageList = new List<Dictionary<string, object>>();
-
-	// 	// 1. Find the Blip element
-	// 	var blip = drawing.Descendants<DocumentFormat.OpenXml.Drawing.Blip>().FirstOrDefault();
-	// 	if (blip == null) return imageList;
-
-	// 	// 2. Relationship ID
-	// 	string? embed = blip.Embed?.Value;
-	// 	if (embed == null) return imageList;
-
-	// 	// 3. Get the ImagePart
-	// 	var mainPart = doc.MainDocumentPart;
-	// 	var imagePart = (ImagePart)mainPart.GetPartById(embed);
-	// 	if (imagePart == null) return imageList;
-
-	// 	// 4. Save the image locally
-	// 	string fileName = $"Image_{embed}.png";
-	// 	using (var stream = imagePart.GetStream())
-	// 	using (var fileStream = new FileStream(fileName, FileMode.Create))
-	// 	{
-	// 		stream.CopyTo(fileStream);
-	// 	}
-
-	// 	// 5. Add to results
-	// 	imageList.Add(new Dictionary<string, object>
-	// {
-	// 	{ "type", "image" },
-	// 	{ "filename", fileName }
-	// });
-
-	// 	return imageList;
-	// }
-
 
 	static List<Dictionary<string, object>> ExtractImagesFromDrawing(
 		WordprocessingDocument doc,
@@ -720,10 +505,10 @@ class Program
 
 		// 7. Add image info to the result list
 		imageList.Add(new Dictionary<string, object>
-	{
-		{ "type", "image" },
-		{ "filename", fileName }
-	});
+		{
+			{ "type", "image" },
+			{ "filename", fileName }
+		});
 
 		return imageList;
 	}
