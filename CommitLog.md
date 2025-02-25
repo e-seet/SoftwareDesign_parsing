@@ -9,8 +9,11 @@ Added but have yet to fully check:
 4. Page break [To check and modify accordingly so that we know if it is empty
    paragraph or page break. This is not fully done yet]
 
-Current Focus: To restructure the node such that metadata is all in a list
-format
+Current Focus for next commit:
+
+1. Line break to be done
+2. Font type to be consistent
+3. Font color
 
 ## Future
 

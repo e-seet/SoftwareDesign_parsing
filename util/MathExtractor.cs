@@ -36,28 +36,6 @@ namespace Utilities
 				mathContentList.Add(mathText);
 			}
 
-			//added this new line
-			// ✅ Extract breaks (page breaks, line breaks)
-			// var breaks = paragraph.Descendants<DocumentFormat.OpenXml.Wordprocessing.Break>().ToList();
-			// if (breaks.Any())
-			// {
-			// 	foreach (var br in breaks)
-			// 	{
-			// 		string breakType = br.Type?.Value switch
-			// 		{
-			// 			BreakValues.Page => "page_break",
-			// 			BreakValues.TextWrapping => "line_break",
-			// 			_ => "unknown_break"
-			// 		};
-
-			// 		paragraphs.Add(new Dictionary<string, object>
-			// {
-			// 	{ "type", breakType },
-			// 	{ "content", breakType == "page_break" ? "[PAGE BREAK]" : "[LINE BREAK]" }
-			// });
-			// 	}
-			// }
-
 			// ✅ Store extracted text (if any)
 			if (!string.IsNullOrWhiteSpace(text))
 			{

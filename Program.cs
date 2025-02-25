@@ -77,14 +77,14 @@ class Program
 			var drawing = element.Descendants<DocumentFormat.OpenXml.Wordprocessing.Drawing>().FirstOrDefault();
 			if (drawing != null)
 			{
-				Console.WriteLine("Extract Image");
+				// Console.WriteLine("Extract Image");
 				// Extract images from the drawing
 				var imageObjects = ExtractContent.ExtractImagesFromDrawing(doc, drawing);
 				elements.AddRange(imageObjects);
 			}
 			else if (element is DocumentFormat.OpenXml.Wordprocessing.Paragraph paragraph)
 			{
-				Console.WriteLine("Extract Paragraph");
+				// Console.WriteLine("Extract Paragraph");
 				elements.Add(ExtractContent.ExtractParagraph(paragraph, doc));
 			}
 			else if (element is Table table)

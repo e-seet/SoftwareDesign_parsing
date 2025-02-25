@@ -76,25 +76,13 @@ namespace Utilities
 					{"fonttype", paraFontType},
 				},
 			};
-			Console.WriteLine(paraFontSize);
-			Console.WriteLine(paraFontType);
-
-			// ✅ Check if paragraph is completely empty
-			if (string.IsNullOrWhiteSpace(text) && !paragraph.Elements<Break>().Any())
-			{
-				paragraphData["type"] = "empty_paragraph1";
-				paragraphData["content"] = "";
-				paragraphData["styling"] = PropertiesList;
-
-				// paragraphData["alignment"] = alignment;
-				// paragraphData["fonttype"] = paraFontType;
-				// paragraphData["fontsize"] = paraFontSize;
-				return paragraphData;
-			}
+			// Console.WriteLine(paraFontSize);
+			// Console.WriteLine(paraFontType);
 
 			// ✅ Detect Page Breaks
 			if (paragraph.Descendants<Break>().Any(b => b.Type?.Value == BreakValues.Page))
 			{
+				Console.WriteLine("Detect page break\n");
 				paragraphData["type"] = "page_break";
 				paragraphData["content"] = "[PAGE BREAK]";
 				// paragraphData["fonttype"] = paraFontType;
@@ -106,6 +94,7 @@ namespace Utilities
 			// ✅ Detect Line Breaks
 			if (paragraph.Descendants<Break>().Any(b => b.Type?.Value == BreakValues.TextWrapping))
 			{
+				Console.WriteLine("Detect line break\n");
 				paragraphData["type"] = "line_break";
 				paragraphData["content"] = "[LINE BREAK]";
 				// paragraphData["fonttype"] = paraFontType;
@@ -114,9 +103,22 @@ namespace Utilities
 
 				return paragraphData;
 			}
+			// ✅ Check if paragraph is completely empty
+			if (string.IsNullOrWhiteSpace(text) && !paragraph.Elements<Break>().Any())
+			{
+				Console.WriteLine("Completely empty\n");
+
+				paragraphData["type"] = "empty_paragraph1";
+				paragraphData["content"] = "";
+				paragraphData["styling"] = PropertiesList;
+
+				return paragraphData;
+			}
 
 			if (paragraph.Descendants<DocumentFormat.OpenXml.Math.OfficeMath>().Any())
 			{
+				Console.WriteLine("Goes to math extractor\n");
+
 				mathContent = MathExtractor.ExtractParagraphsWithMath(paragraph);
 				havemath = true;
 				// var mathContent = MathExtractor.ExtractParagraphsWithMath(paragraph);
@@ -146,6 +148,8 @@ namespace Utilities
 				};
 			}
 
+
+
 			// Collect each run's text and formatting
 			var runsList = new List<Dictionary<string, object>>();
 
@@ -161,34 +165,54 @@ namespace Utilities
 				bool runBold = (run.RunProperties?.Bold != null);
 				bool runItalic = (run.RunProperties?.Italic != null);
 
-				// 	// ✅ Extract Font Type
+				// Extract Font Type
 				string runfontType = run.RunProperties?.RunFonts?.Ascii?.Value ?? "Default Font";
 
-				// 	// ✅ Extract Font Size (stored in half-points, so divide by 2)
-				// string fontSizeRaw = run.RunProperties?.FontSize?.Val?.Value ?? null; // else null
 				string? runFontSizeRaw = run.RunProperties?.FontSize?.Val?.Value;
 				int runFontSize = runFontSizeRaw != null ? int.Parse(runFontSizeRaw) / 2 : 12; // Default to 12pt
 
+				Console.WriteLine("run run:");
+				Console.WriteLine(runText);
+				Console.WriteLine("\n");
+
+				// runsList.Add(new Dictionary<string, object>
+				// {
+				// 		{ "text", runText },
+				// 		{ "styling", PropertiesList}
+				// });
 				runsList.Add(new Dictionary<string, object>
-			{
-					{ "text", runText },
+				{
+					{ "type", "text_run" },
+					{ "content", runText },
 					{ "styling", PropertiesList}
-			});
+				});
 			}
+
+			Console.WriteLine($"Total runs found: {runsList.Count}");
 
 			if (!runsList.Any())
 			{
-				Console.WriteLine("No run or breaks. Maybe empty paragraph. \n");
-				Console.WriteLine("This may be creating issues. to check\n");
-				return new Dictionary<string, object>
+				if (runsList.Count == 0)
 				{
-					{ "type", "empty_paragraph" },
-					{ "content", "" }
-				};
+					return new Dictionary<string, object>
+					{
+						{ "type", "paragraph_run?" },
+						{ "content", text }
+					};
+				}
+				else
+				{
+					return new Dictionary<string, object>
+					{
+						{ "type", "paragraph_run" },
+						{ "content", runsList }
+					};
+				}
+
 			}
 			else
 			{
-				Console.WriteLine("last test case of ExtractParagraph function\n");
+				// Console.WriteLine("last test case of ExtractParagraph function\n");
 
 				if (havemath == true)
 				{
@@ -202,21 +226,27 @@ namespace Utilities
 					}
 
 					return new Dictionary<string, object>
-				{
-					{ "type", FormatExtractor.GetParagraphType(style) },
-					{ "content", mathstring },
-					{ "styling", PropertiesList}
-				};
+					{
+						{ "type", FormatExtractor.GetParagraphType(style) },
+						{ "content", mathstring },
+						{ "styling", PropertiesList}
+					};
 				}
 				else
 				{
+					Console.WriteLine("else2\n");
+
+					Console.WriteLine("this is my text:");
+					Console.WriteLine(text);
+					Console.WriteLine("\nend of my text");
+
 					return new Dictionary<string, object>
-				{
+					{
 					{ "type", FormatExtractor.GetParagraphType(style) },
 					{ "content", text },
 					{ "styling", PropertiesList}
 
-				};
+					};
 				}
 			}
 		}
