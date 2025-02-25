@@ -39,7 +39,6 @@ class Program
 
 			// Write JSON to file
 			File.WriteAllText(jsonOutputPath, jsonOutput);
-
 			Console.WriteLine($"JSON output saved to {jsonOutputPath}");
 		}
 	}
@@ -117,18 +116,9 @@ class Program
 
 		foreach (var element in body.Elements<OpenXmlElement>())
 		{
-			// if (element is DocumentFormat.OpenXml.Math.OfficeMath mathElement)
-			// {
-			// 	Console.WriteLine("element is office math");
-			// 	Console.WriteLine("IDK case 1");
-			// 	// elements.Add(MathExtractor.ExtractMathEquation(mathElement)); // ✅ Extract proper math equations
-			// }
-			// else
 			if (element is DocumentFormat.OpenXml.Wordprocessing.Paragraph paragraph)
 			{
-				// Console.WriteLine("element is  not office math");
-				Console.WriteLine("IDK case 2");
-				// elements.AddRange(MathExtractor.ExtractParagraphsWithMath(paragraph)); // ✅ Extract paragraphs & Unicode math
+				Console.WriteLine("Extract Paragraph");
 				elements.Add(ExtractParagraph(paragraph));
 			}
 			else if (element is Table table)
@@ -143,19 +133,22 @@ class Program
 
 	static Dictionary<string, object> ExtractParagraph(
 		DocumentFormat.OpenXml.Wordprocessing.Paragraph paragraph
-	) // ✅ Use full namespace
+	)
 	{
 
 		string text = string.Join(
 			"",
 			paragraph.Descendants<DocumentFormat.OpenXml.Wordprocessing.Text>().Select(t => t.Text)
-		); // ✅ Fixed ambiguous reference
+		);
 		string style = paragraph.ParagraphProperties?.ParagraphStyleId?.Val?.Value ?? "Normal";
 		bool isBold = paragraph.Descendants<Bold>().Any();
 		bool isItalic = paragraph.Descendants<Italic>().Any();
 		var alignment = paragraph.ParagraphProperties?.Justification?.Val?.ToString() ?? "left";
-
 		var paragraphData = new Dictionary<string, object>();
+		var havemath = false;
+		// List<Dictionary<string, object>> mathContent = null;
+		List<Dictionary<string, object>> mathContent = new List<Dictionary<string, object>>();
+
 		// ✅ Check if paragraph is completely empty
 		if (string.IsNullOrWhiteSpace(text) && !paragraph.Elements<Break>().Any())
 		{
@@ -182,22 +175,198 @@ class Program
 
 		if (paragraph.Descendants<DocumentFormat.OpenXml.Math.OfficeMath>().Any())
 		{
-			var mathContent = MathExtractor.ExtractParagraphsWithMath(paragraph);
+			mathContent = MathExtractor.ExtractParagraphsWithMath(paragraph);
+
+			havemath = true;
+			// var mathContent = MathExtractor.ExtractParagraphsWithMath(paragraph);
 			// elements.AddRange(MathExtractor.ExtractParagraphsWithMath(paragraph)); // ✅ Extract paragraphs & Unicode math
 			// return mathContent;
 		}
 
 
-		return new Dictionary<string, object>
+		// Check for page/line breaks at the paragraph level
+		if (paragraph.Descendants<Break>().Any(b => b.Type?.Value == BreakValues.Page))
 		{
-			{ "type", GetParagraphType(style) },
-			{ "content", text },
-			{ "bold", isBold },
-			{ "italic", isItalic },
-			{ "alignment", alignment },
-		};
+			Console.WriteLine("break value\n");
+			return new Dictionary<string, object>
+				{
+					{ "type", "page_break" },
+					{ "content", "[PAGE BREAK]" }
+				};
+		}
+
+		if (paragraph.Descendants<Break>().Any(b => b.Type?.Value == BreakValues.TextWrapping))
+		{
+			Console.WriteLine("line break\n");
+			return new Dictionary<string, object>
+				{
+					{ "type", "line_break" },
+					{ "content", "[LINE BREAK]" }
+				};
+		}
+
+		// Collect each run's text and formatting
+		var runsList = new List<Dictionary<string, object>>();
+
+		foreach (var run in paragraph.Elements<Run>())
+		{
+			string runText = string.Join("", run.Descendants<Text>().Select(t => t.Text));
+			if (string.IsNullOrWhiteSpace(runText))
+			{
+				Console.WriteLine("Continue\n");
+				continue; // Skip empty runs
+			}
+
+			bool runBold = (run.RunProperties?.Bold != null);
+			bool runItalic = (run.RunProperties?.Italic != null);
+
+			runsList.Add(new Dictionary<string, object>
+				{
+					{ "text", runText },
+					{ "bold", runBold },
+					{ "italic", runItalic }
+				});
+		}
+
+		if (!runsList.Any())
+		{
+			Console.WriteLine("No run or breaks. Maybe empty paragraph\n");
+			return new Dictionary<string, object>
+				{
+					{ "type", "empty_paragraph" },
+					{ "content", "" }
+				};
+		}
+		else
+		{
+			Console.WriteLine("last test case of ExtractParagraph function\n");
+
+			if (havemath == true)
+			{
+				var mathstring = "";
+				Console.WriteLine("Getting back the result and we see what is inside the for loop\n");
+
+				foreach (var mathEntry in mathContent)
+				{
+					Console.WriteLine(mathEntry["content"]);
+					mathstring = mathEntry["content"] + mathstring;
+				}
+
+				return new Dictionary<string, object>
+				{
+					{ "type", GetParagraphType(style) },
+					{ "content", mathstring },
+					{ "bold", isBold },
+					{ "italic", isItalic },
+					{ "alignment", alignment },
+				};
+			}
+			else
+			{
+
+				return new Dictionary<string, object>
+				{
+					{ "type", GetParagraphType(style) },
+					{ "content", text },
+					{ "bold", isBold },
+					{ "italic", isItalic },
+					{ "alignment", alignment },
+				};
+			}
+		}
+
 	}
 
+
+	// /*
+	static Dictionary<string, object> ExtractParagraph_v2(Paragraph paragraph)
+	{
+		// 1) Check for page/line breaks at the paragraph level
+		if (paragraph.Descendants<Break>().Any(b => b.Type?.Value == BreakValues.Page))
+		{
+			Console.WriteLine("break value\n");
+			return new Dictionary<string, object>
+				{
+					{ "type", "page_break" },
+					{ "content", "[PAGE BREAK]" }
+				};
+		}
+
+		if (paragraph.Descendants<Break>().Any(b => b.Type?.Value == BreakValues.TextWrapping))
+		{
+			Console.WriteLine("line break\n");
+			return new Dictionary<string, object>
+				{
+					{ "type", "line_break" },
+					{ "content", "[LINE BREAK]" }
+				};
+		}
+
+		// 2) Collect each run's text and formatting
+		var runsList = new List<Dictionary<string, object>>();
+
+		foreach (var run in paragraph.Elements<Run>())
+		{
+			string runText = string.Join("", run.Descendants<Text>().Select(t => t.Text));
+			if (string.IsNullOrWhiteSpace(runText))
+			{
+				Console.WriteLine("Continue\n");
+				continue; // Skip empty runs
+			}
+
+			bool runBold = (run.RunProperties?.Bold != null);
+			bool runItalic = (run.RunProperties?.Italic != null);
+
+			runsList.Add(new Dictionary<string, object>
+				{
+					{ "text", runText },
+					{ "bold", runBold },
+					{ "italic", runItalic }
+				});
+		}
+
+		// 3) If no runs and no breaks, it's likely an empty paragraph
+		if (!runsList.Any())
+		{
+			Console.WriteLine("No run or breaks. Maybe empty paragraph\n");
+			return new Dictionary<string, object>
+				{
+					{ "type", "empty_paragraph" },
+					{ "content", "" }
+				};
+		}
+
+		// 4) (Optional) If paragraph contains math, handle or store it
+		if (paragraph.Descendants<DocumentFormat.OpenXml.Math.OfficeMath>().Any())
+		{
+			Console.WriteLine("Got office math\n");
+			// Example: If you want to extract math separately, do something like:
+			// var mathSegments = MathExtractor.ExtractParagraphsWithMath(paragraph);
+			// Then merge them into your runsList or store them as a separate property.
+
+			// original code taken
+			var mathContent = MathExtractor.ExtractParagraphsWithMath(paragraph);
+
+		}
+
+		// 5) Determine the paragraph style (Heading1, Heading2, etc.)
+		string style = paragraph.ParagraphProperties?.ParagraphStyleId?.Val?.Value ?? "Normal";
+		string paragraphType = style switch
+		{
+			"Heading1" => "h1",
+			"Heading2" => "h2",
+			"Heading3" => "h3",
+			_ => "paragraph",
+		};
+
+		// 6) Return a dictionary representing this paragraph
+		return new Dictionary<string, object>
+			{
+				{ "type", paragraphType },
+				{ "runs", runsList }
+			};
+	}
+	// */
 	static string GetParagraphType(string style)
 	{
 		return style switch

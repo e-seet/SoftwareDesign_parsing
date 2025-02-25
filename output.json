@@ -29,11 +29,8 @@
       "alignment": "left"
     },
     {
-      "type": "paragraph",
-      "content": "https://puginarug.com/",
-      "bold": false,
-      "italic": false,
-      "alignment": "left"
+      "type": "empty_paragraph",
+      "content": ""
     },
     {
       "type": "paragraph",
@@ -215,10 +212,18 @@
     },
     {
       "type": "paragraph",
-      "content": "  <- math1",
+      "content": "(1/2) √(4)  <- math",
       "bold": false,
       "italic": false,
       "alignment": "left"
+    },
+    {
+      "type": "empty_paragraph",
+      "content": ""
+    },
+    {
+      "type": "empty_paragraph",
+      "content": ""
     },
     {
       "type": "empty_paragraph",
