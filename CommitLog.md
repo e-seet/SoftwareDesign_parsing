@@ -23,9 +23,9 @@ Current Focus for next commit:
 
    - Font type
    - Font Color
-   - Highlighting
-   - bullet point
-   - indented text
-   - Numbered list
+   - Highlighting [Not done]
+   - bullet point [Not done]
+   - indented text [Not sure]
+   - Numbered list [Not sure]
 
 3. Format & structure of the node
