@@ -15,14 +15,16 @@ class Program
 {
 	static void Main()
 	{
-		string filePath = "Datarepository.docx"; // Change this to your actual file path
+		string filePath = "Datarepository_zx.docx"; // Change this to your actual file path
+													// string filePath = "Datarepository.docx"; // Change this to your actual file path
+													// string filePath = "Mathrepository.docx"; // Change this to your actual file path
 		string jsonOutputPath = "output.json"; // File where JSON will be saved
 
 		using (WordprocessingDocument wordDoc = WordprocessingDocument.Open(filePath, false))
 		{
 			var documentData = new
 			{
-				// metadata = GetDocumentMetadata(wordDoc),
+				metadata = GetDocumentMetadata(wordDoc),
 
 				// headers = DocumentHeadersFooters.ExtractHeaders(wordDoc),
 
@@ -46,7 +48,7 @@ class Program
 			Console.WriteLine($"JSON output saved to {jsonOutputPath}");
 		}
 	}
-
+	//
 	static Dictionary<string, string> GetDocumentMetadata(WordprocessingDocument doc)
 	{
 		var metadata = new Dictionary<string, string>();
@@ -95,5 +97,6 @@ class Program
 		}
 		return elements;
 	}
+
 
 }

@@ -1,4 +1,5 @@
 {
+  "metadata": {},
   "document": [
     {
       "type": "h1",
@@ -8,8 +9,10 @@
           "bold": true,
           "italic": false,
           "alignment": "left",
-          "fontsize": 20,
-          "fonttype": "Heading1"
+          "fontsize": 12,
+          "fonttype": "Default Font",
+          "color": "black",
+          "highlight": null
         }
       ]
     },
@@ -21,8 +24,10 @@
           "bold": true,
           "italic": false,
           "alignment": "left",
-          "fontsize": 16,
-          "fonttype": "Heading2"
+          "fontsize": 12,
+          "fonttype": "Default Font",
+          "color": "black",
+          "highlight": null
         }
       ]
     },
@@ -34,8 +39,10 @@
           "bold": true,
           "italic": false,
           "alignment": "left",
-          "fontsize": 14,
-          "fonttype": "Heading3"
+          "fontsize": 12,
+          "fonttype": "Default Font",
+          "color": "black",
+          "highlight": null
         }
       ]
     },
@@ -48,7 +55,9 @@
           "italic": false,
           "alignment": "left",
           "fontsize": 12,
-          "fonttype": "Default Font"
+          "fonttype": "Default Font",
+          "color": "black",
+          "highlight": null
         }
       ]
     },
@@ -65,7 +74,9 @@
           "italic": false,
           "alignment": "left",
           "fontsize": 12,
-          "fonttype": "Default Font"
+          "fonttype": "Default Font",
+          "color": "black",
+          "highlight": null
         }
       ]
     },
@@ -78,137 +89,700 @@
           "italic": false,
           "alignment": "left",
           "fontsize": 12,
-          "fonttype": "Default Font"
+          "fonttype": "Default Font",
+          "color": "black",
+          "highlight": null
         }
       ]
     },
     {
       "type": "paragraph",
       "content": "this is a bolded text",
-      "styling": [
+      "runs": [
         {
-          "bold": true,
-          "italic": false,
-          "alignment": "left",
-          "fontsize": 12,
-          "fonttype": "Default Font"
+          "type": "text_run",
+          "content": "this",
+          "styling": {
+            "bold": true,
+            "italic": false,
+            "alignment": "left",
+            "fontsize": 12,
+            "fonttype": "Default Font",
+            "color": "black",
+            "highlight": null
+          }
+        },
+        {
+          "type": "text_run",
+          "content": " is a bolded text",
+          "styling": {
+            "bold": true,
+            "italic": false,
+            "alignment": "left",
+            "fontsize": 12,
+            "fonttype": "Default Font",
+            "color": "black",
+            "highlight": null
+          }
         }
       ]
     },
     {
       "type": "paragraph",
       "content": "this is a italic text",
-      "styling": [
+      "runs": [
         {
-          "bold": false,
-          "italic": true,
-          "alignment": "left",
-          "fontsize": 12,
-          "fonttype": "Default Font"
+          "type": "text_run",
+          "content": "this is ",
+          "styling": {
+            "bold": false,
+            "italic": true,
+            "alignment": "left",
+            "fontsize": 12,
+            "fonttype": "Default Font",
+            "color": "black",
+            "highlight": null
+          }
+        },
+        {
+          "type": "text_run",
+          "content": "a",
+          "styling": {
+            "bold": false,
+            "italic": true,
+            "alignment": "left",
+            "fontsize": 12,
+            "fonttype": "Default Font",
+            "color": "black",
+            "highlight": null
+          }
+        },
+        {
+          "type": "text_run",
+          "content": " italic text",
+          "styling": {
+            "bold": false,
+            "italic": true,
+            "alignment": "left",
+            "fontsize": 12,
+            "fonttype": "Default Font",
+            "color": "black",
+            "highlight": null
+          }
         }
       ]
     },
     {
       "type": "paragraph",
-      "content": "this is a bulleted point",
+      "content": "bulleted type 1",
+      "runs": [
+        {
+          "type": "text_run",
+          "content": "bulleted",
+          "styling": {
+            "bold": false,
+            "italic": false,
+            "alignment": "left",
+            "fontsize": 12,
+            "fonttype": "Default Font",
+            "color": "black",
+            "highlight": null
+          }
+        },
+        {
+          "type": "text_run",
+          "content": " type 1",
+          "styling": {
+            "bold": false,
+            "italic": false,
+            "alignment": "left",
+            "fontsize": 12,
+            "fonttype": "Default Font",
+            "color": "black",
+            "highlight": null
+          }
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": "bulleted type 1 again",
+      "runs": [
+        {
+          "type": "text_run",
+          "content": "bulleted",
+          "styling": {
+            "bold": false,
+            "italic": false,
+            "alignment": "left",
+            "fontsize": 12,
+            "fonttype": "Default Font",
+            "color": "black",
+            "highlight": null
+          }
+        },
+        {
+          "type": "text_run",
+          "content": " type 1 again",
+          "styling": {
+            "bold": false,
+            "italic": false,
+            "alignment": "left",
+            "fontsize": 12,
+            "fonttype": "Default Font",
+            "color": "black",
+            "highlight": null
+          }
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": "bulleted type 2",
+      "runs": [
+        {
+          "type": "text_run",
+          "content": "bulleted",
+          "styling": {
+            "bold": false,
+            "italic": false,
+            "alignment": "left",
+            "fontsize": 12,
+            "fonttype": "Default Font",
+            "color": "black",
+            "highlight": null
+          }
+        },
+        {
+          "type": "text_run",
+          "content": " type 2",
+          "styling": {
+            "bold": false,
+            "italic": false,
+            "alignment": "left",
+            "fontsize": 12,
+            "fonttype": "Default Font",
+            "color": "black",
+            "highlight": null
+          }
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": "bulleted type 3",
+      "runs": [
+        {
+          "type": "text_run",
+          "content": "bulleted",
+          "styling": {
+            "bold": false,
+            "italic": false,
+            "alignment": "left",
+            "fontsize": 12,
+            "fonttype": "Default Font",
+            "color": "black",
+            "highlight": null
+          }
+        },
+        {
+          "type": "text_run",
+          "content": " type 3",
+          "styling": {
+            "bold": false,
+            "italic": false,
+            "alignment": "left",
+            "fontsize": 12,
+            "fonttype": "Default Font",
+            "color": "black",
+            "highlight": null
+          }
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": "bulleted type 4",
+      "runs": [
+        {
+          "type": "text_run",
+          "content": "bulleted type ",
+          "styling": {
+            "bold": false,
+            "italic": false,
+            "alignment": "left",
+            "fontsize": 12,
+            "fonttype": "Default Font",
+            "color": "black",
+            "highlight": null
+          }
+        },
+        {
+          "type": "text_run",
+          "content": "4",
+          "styling": {
+            "bold": false,
+            "italic": false,
+            "alignment": "left",
+            "fontsize": 12,
+            "fonttype": "Default Font",
+            "color": "black",
+            "highlight": null
+          }
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": "bulleted type 5",
+      "runs": [
+        {
+          "type": "text_run",
+          "content": "bulleted",
+          "styling": {
+            "bold": false,
+            "italic": false,
+            "alignment": "left",
+            "fontsize": 12,
+            "fonttype": "Default Font",
+            "color": "black",
+            "highlight": null
+          }
+        },
+        {
+          "type": "text_run",
+          "content": " type ",
+          "styling": {
+            "bold": false,
+            "italic": false,
+            "alignment": "left",
+            "fontsize": 12,
+            "fonttype": "Default Font",
+            "color": "black",
+            "highlight": null
+          }
+        },
+        {
+          "type": "text_run",
+          "content": "5",
+          "styling": {
+            "bold": false,
+            "italic": false,
+            "alignment": "left",
+            "fontsize": 12,
+            "fonttype": "Default Font",
+            "color": "black",
+            "highlight": null
+          }
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": "bulleted type 6",
+      "runs": [
+        {
+          "type": "text_run",
+          "content": "bulleted",
+          "styling": {
+            "bold": false,
+            "italic": false,
+            "alignment": "left",
+            "fontsize": 12,
+            "fonttype": "Default Font",
+            "color": "black",
+            "highlight": null
+          }
+        },
+        {
+          "type": "text_run",
+          "content": " type ",
+          "styling": {
+            "bold": false,
+            "italic": false,
+            "alignment": "left",
+            "fontsize": 12,
+            "fonttype": "Default Font",
+            "color": "black",
+            "highlight": null
+          }
+        },
+        {
+          "type": "text_run",
+          "content": "6",
+          "styling": {
+            "bold": false,
+            "italic": false,
+            "alignment": "left",
+            "fontsize": 12,
+            "fonttype": "Default Font",
+            "color": "black",
+            "highlight": null
+          }
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": "bulleted type 7",
+      "runs": [
+        {
+          "type": "text_run",
+          "content": "bulleted ",
+          "styling": {
+            "bold": false,
+            "italic": false,
+            "alignment": "left",
+            "fontsize": 12,
+            "fonttype": "Default Font",
+            "color": "black",
+            "highlight": null
+          }
+        },
+        {
+          "type": "text_run",
+          "content": "type",
+          "styling": {
+            "bold": false,
+            "italic": false,
+            "alignment": "left",
+            "fontsize": 12,
+            "fonttype": "Default Font",
+            "color": "black",
+            "highlight": null
+          }
+        },
+        {
+          "type": "text_run",
+          "content": "7",
+          "styling": {
+            "bold": false,
+            "italic": false,
+            "alignment": "left",
+            "fontsize": 12,
+            "fonttype": "Default Font",
+            "color": "black",
+            "highlight": null
+          }
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": "numbered list",
       "styling": [
         {
           "bold": false,
           "italic": false,
           "alignment": "left",
           "fontsize": 12,
-          "fonttype": "Default Font"
+          "fonttype": "Default Font",
+          "color": "black",
+          "highlight": null
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": "numbered list with bracket",
+      "styling": [
+        {
+          "bold": false,
+          "italic": false,
+          "alignment": "left",
+          "fontsize": 12,
+          "fonttype": "Default Font",
+          "color": "black",
+          "highlight": null
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": "roman numeral list",
+      "styling": [
+        {
+          "bold": false,
+          "italic": false,
+          "alignment": "left",
+          "fontsize": 12,
+          "fonttype": "Default Font",
+          "color": "black",
+          "highlight": null
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": "lowercase roman numeral list",
+      "styling": [
+        {
+          "bold": false,
+          "italic": false,
+          "alignment": "left",
+          "fontsize": 12,
+          "fonttype": "Default Font",
+          "color": "black",
+          "highlight": null
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": "uppercase lettered list",
+      "styling": [
+        {
+          "bold": false,
+          "italic": false,
+          "alignment": "left",
+          "fontsize": 12,
+          "fonttype": "Default Font",
+          "color": "black",
+          "highlight": null
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": "uppercase lettered list 2",
+      "styling": [
+        {
+          "bold": false,
+          "italic": false,
+          "alignment": "left",
+          "fontsize": 12,
+          "fonttype": "Default Font",
+          "color": "black",
+          "highlight": null
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": "uppercase lettered list 2.1 nested",
+      "styling": [
+        {
+          "bold": false,
+          "italic": false,
+          "alignment": "left",
+          "fontsize": 12,
+          "fonttype": "Default Font",
+          "color": "black",
+          "highlight": null
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": "uppercase lettered list 2.2 nested",
+      "styling": [
+        {
+          "bold": false,
+          "italic": false,
+          "alignment": "left",
+          "fontsize": 12,
+          "fonttype": "Default Font",
+          "color": "black",
+          "highlight": null
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": "uppercase lettered list 2.2.1 nested",
+      "styling": [
+        {
+          "bold": false,
+          "italic": false,
+          "alignment": "left",
+          "fontsize": 12,
+          "fonttype": "Default Font",
+          "color": "black",
+          "highlight": null
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": "lowercase lettered list",
+      "styling": [
+        {
+          "bold": false,
+          "italic": false,
+          "alignment": "left",
+          "fontsize": 12,
+          "fonttype": "Default Font",
+          "color": "black",
+          "highlight": null
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": "lowercase lettered with bracket list ",
+      "styling": [
+        {
+          "bold": false,
+          "italic": false,
+          "alignment": "left",
+          "fontsize": 12,
+          "fonttype": "Default Font",
+          "color": "black",
+          "highlight": null
         }
       ]
     },
     {
       "type": "paragraph",
       "content": "this is an indented text",
-      "styling": [
+      "runs": [
         {
-          "bold": false,
-          "italic": false,
-          "alignment": "left",
-          "fontsize": 12,
-          "fonttype": "Default Font"
-        }
-      ]
-    },
-    {
-      "type": "paragraph",
-      "content": "numbered list 1",
-      "styling": [
+          "type": "text_run",
+          "content": "this",
+          "styling": {
+            "bold": false,
+            "italic": false,
+            "alignment": "left",
+            "fontsize": 12,
+            "fonttype": "Default Font",
+            "color": "black",
+            "highlight": null
+          }
+        },
         {
-          "bold": false,
-          "italic": false,
-          "alignment": "left",
-          "fontsize": 12,
-          "fonttype": "Default Font"
-        }
-      ]
-    },
-    {
-      "type": "paragraph",
-      "content": "numbered list 2",
-      "styling": [
-        {
-          "bold": false,
-          "italic": false,
-          "alignment": "left",
-          "fontsize": 12,
-          "fonttype": "Default Font"
-        }
-      ]
-    },
-    {
-      "type": "paragraph",
-      "content": "numbers list 3 ",
-      "styling": [
-        {
-          "bold": false,
-          "italic": false,
-          "alignment": "left",
-          "fontsize": 12,
-          "fonttype": "Default Font"
+          "type": "text_run",
+          "content": " is an indented text",
+          "styling": {
+            "bold": false,
+            "italic": false,
+            "alignment": "left",
+            "fontsize": 12,
+            "fonttype": "Default Font",
+            "color": "black",
+            "highlight": null
+          }
         }
       ]
     },
     {
       "type": "paragraph",
       "content": "middle align",
-      "styling": [
+      "runs": [
         {
-          "bold": false,
-          "italic": false,
-          "alignment": "center",
-          "fontsize": 12,
-          "fonttype": "Default Font"
+          "type": "text_run",
+          "content": "middle ",
+          "styling": {
+            "bold": false,
+            "italic": false,
+            "alignment": "center",
+            "fontsize": 12,
+            "fonttype": "Default Font",
+            "color": "black",
+            "highlight": null
+          }
+        },
+        {
+          "type": "text_run",
+          "content": "align",
+          "styling": {
+            "bold": false,
+            "italic": false,
+            "alignment": "center",
+            "fontsize": 12,
+            "fonttype": "Default Font",
+            "color": "black",
+            "highlight": null
+          }
         }
       ]
     },
     {
       "type": "paragraph",
       "content": "end align",
-      "styling": [
+      "runs": [
         {
-          "bold": false,
-          "italic": false,
-          "alignment": "right",
-          "fontsize": 12,
-          "fonttype": "Default Font"
+          "type": "text_run",
+          "content": "end",
+          "styling": {
+            "bold": false,
+            "italic": false,
+            "alignment": "right",
+            "fontsize": 12,
+            "fonttype": "Default Font",
+            "color": "black",
+            "highlight": null
+          }
+        },
+        {
+          "type": "text_run",
+          "content": " align",
+          "styling": {
+            "bold": false,
+            "italic": false,
+            "alignment": "right",
+            "fontsize": 12,
+            "fonttype": "Default Font",
+            "color": "black",
+            "highlight": null
+          }
         }
       ]
     },
     {
       "type": "paragraph",
       "content": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic",
-      "styling": [
+      "runs": [
         {
-          "bold": true,
-          "italic": false,
-          "alignment": "both",
-          "fontsize": 12,
-          "fonttype": "Default Font"
+          "type": "text_run",
+          "content": "Lorem Ipsum",
+          "styling": {
+            "bold": true,
+            "italic": false,
+            "alignment": "both",
+            "fontsize": 10,
+            "fonttype": "Default Font",
+            "color": "black",
+            "highlight": null
+          }
+        },
+        {
+          "type": "text_run",
+          "content": " is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not ",
+          "styling": {
+            "bold": false,
+            "italic": false,
+            "alignment": "both",
+            "fontsize": 10,
+            "fonttype": "Default Font",
+            "color": "black",
+            "highlight": null
+          }
+        },
+        {
+          "type": "text_run",
+          "content": "only",
+          "styling": {
+            "bold": false,
+            "italic": false,
+            "alignment": "both",
+            "fontsize": 10,
+            "fonttype": "Default Font",
+            "color": "black",
+            "highlight": null
+          }
+        },
+        {
+          "type": "text_run",
+          "content": " five centuries, but also the leap into electronic",
+          "styling": {
+            "bold": false,
+            "italic": false,
+            "alignment": "both",
+            "fontsize": 10,
+            "fonttype": "Default Font",
+            "color": "black",
+            "highlight": null
+          }
         }
       ]
     },
@@ -220,8 +794,10 @@
           "bold": false,
           "italic": false,
           "alignment": "left",
-          "fontsize": 12,
-          "fonttype": "Default Font"
+          "fontsize": 10,
+          "fonttype": "Default Font",
+          "color": "black",
+          "highlight": null
         }
       ]
     },
@@ -235,7 +811,9 @@
           "italic": false,
           "alignment": "left",
           "fontsize": 12,
-          "fonttype": "Default Font"
+          "fonttype": "Default Font",
+          "color": "black",
+          "highlight": null
         }
       ]
     },
@@ -264,7 +842,9 @@
           "italic": false,
           "alignment": "left",
           "fontsize": 12,
-          "fonttype": "Default Font"
+          "fonttype": "Default Font",
+          "color": "black",
+          "highlight": null
         }
       ]
     },
@@ -277,7 +857,9 @@
           "italic": false,
           "alignment": "left",
           "fontsize": 12,
-          "fonttype": "Default Font"
+          "fonttype": "Arial Unicode MS",
+          "color": "black",
+          "highlight": null
         }
       ]
     },
@@ -290,7 +872,9 @@
           "italic": false,
           "alignment": "left",
           "fontsize": 12,
-          "fonttype": "Default Font"
+          "fonttype": "Default Font",
+          "color": "black",
+          "highlight": null
         }
       ]
     },
@@ -303,20 +887,54 @@
           "italic": false,
           "alignment": "left",
           "fontsize": 12,
-          "fonttype": "Default Font"
+          "fonttype": "Default Font",
+          "color": "black",
+          "highlight": null
         }
       ]
     },
     {
       "type": "paragraph",
       "content": "font calibri here",
-      "styling": [
+      "runs": [
         {
-          "bold": false,
-          "italic": false,
-          "alignment": "left",
-          "fontsize": 12,
-          "fonttype": "Default Font"
+          "type": "text_run",
+          "content": "font ",
+          "styling": {
+            "bold": false,
+            "italic": false,
+            "alignment": "left",
+            "fontsize": 12,
+            "fonttype": "Calibri",
+            "color": "black",
+            "highlight": null
+          }
+        },
+        {
+          "type": "text_run",
+          "content": "calibri",
+          "styling": {
+            "bold": false,
+            "italic": false,
+            "alignment": "left",
+            "fontsize": 12,
+            "fonttype": "Calibri",
+            "color": "black",
+            "highlight": null
+          }
+        },
+        {
+          "type": "text_run",
+          "content": " here",
+          "styling": {
+            "bold": false,
+            "italic": false,
+            "alignment": "left",
+            "fontsize": 12,
+            "fonttype": "Calibri",
+            "color": "black",
+            "highlight": null
+          }
         }
       ]
     },
@@ -329,7 +947,9 @@
           "italic": false,
           "alignment": "left",
           "fontsize": 12,
-          "fonttype": "Default Font"
+          "fonttype": "Times New Roman",
+          "color": "black",
+          "highlight": null
         }
       ]
     },
@@ -343,20 +963,41 @@
           "italic": false,
           "alignment": "left",
           "fontsize": 12,
-          "fonttype": "Default Font"
+          "fonttype": "Default Font",
+          "color": "black",
+          "highlight": null
         }
       ]
     },
     {
       "type": "paragraph",
       "content": "diff spacing heres",
-      "styling": [
+      "runs": [
         {
-          "bold": false,
-          "italic": false,
-          "alignment": "left",
-          "fontsize": 12,
-          "fonttype": "Default Font"
+          "type": "text_run",
+          "content": "diff spacing ",
+          "styling": {
+            "bold": false,
+            "italic": false,
+            "alignment": "left",
+            "fontsize": 12,
+            "fonttype": "Times New Roman",
+            "color": "black",
+            "highlight": null
+          }
+        },
+        {
+          "type": "text_run",
+          "content": "heres",
+          "styling": {
+            "bold": false,
+            "italic": false,
+            "alignment": "left",
+            "fontsize": 12,
+            "fonttype": "Times New Roman",
+            "color": "black",
+            "highlight": null
+          }
         }
       ]
     },
@@ -369,7 +1010,9 @@
           "italic": false,
           "alignment": "left",
           "fontsize": 12,
-          "fonttype": "Default Font"
+          "fonttype": "Times New Roman",
+          "color": "black",
+          "highlight": null
         }
       ]
     },
@@ -382,7 +1025,9 @@
           "italic": false,
           "alignment": "left",
           "fontsize": 12,
-          "fonttype": "Default Font"
+          "fonttype": "Times New Roman",
+          "color": "black",
+          "highlight": null
         }
       ]
     },
@@ -396,7 +1041,9 @@
           "italic": false,
           "alignment": "left",
           "fontsize": 12,
-          "fonttype": "Default Font"
+          "fonttype": "Default Font",
+          "color": "black",
+          "highlight": null
         }
       ]
     },
@@ -409,7 +1056,9 @@
           "italic": false,
           "alignment": "left",
           "fontsize": 12,
-          "fonttype": "Default Font"
+          "fonttype": "Default Font",
+          "color": "black",
+          "highlight": null
         }
       ]
     },
@@ -423,7 +1072,9 @@
           "italic": false,
           "alignment": "left",
           "fontsize": 12,
-          "fonttype": "Default Font"
+          "fonttype": "Default Font",
+          "color": "black",
+          "highlight": null
         }
       ]
     },
@@ -437,7 +1088,9 @@
           "italic": false,
           "alignment": "left",
           "fontsize": 12,
-          "fonttype": "Default Font"
+          "fonttype": "Default Font",
+          "color": "black",
+          "highlight": null
         }
       ]
     },
@@ -451,7 +1104,9 @@
           "italic": false,
           "alignment": "left",
           "fontsize": 12,
-          "fonttype": "Default Font"
+          "fonttype": "Default Font",
+          "color": "black",
+          "highlight": null
         }
       ]
     },
@@ -464,7 +1119,9 @@
           "italic": false,
           "alignment": "left",
           "fontsize": 12,
-          "fonttype": "Default Font"
+          "fonttype": "Default Font",
+          "color": "black",
+          "highlight": null
         }
       ]
     },
@@ -478,7 +1135,9 @@
           "italic": false,
           "alignment": "left",
           "fontsize": 12,
-          "fonttype": "Default Font"
+          "fonttype": "Default Font",
+          "color": "black",
+          "highlight": null
         }
       ]
     },
@@ -492,31 +1151,35 @@
           "italic": false,
           "alignment": "left",
           "fontsize": 12,
-          "fonttype": "Default Font"
-        }
-      ]
-    },
-    {
-      "type": "image",
-      "filename": "Image_rId8.png"
-    },
-    {
-      "alignment": "left",
-      "type": "empty_paragraph1",
-      "content": "",
-      "styling": [
-        {
-          "bold": false,
-          "italic": false,
-          "alignment": "left",
-          "fontsize": 12,
-          "fonttype": "Default Font"
+          "fonttype": "Default Font",
+          "color": "black",
+          "highlight": null
         }
       ]
     },
     {
       "type": "image",
       "filename": "Image_rId9.png"
+    },
+    {
+      "alignment": "left",
+      "type": "empty_paragraph1",
+      "content": "",
+      "styling": [
+        {
+          "bold": false,
+          "italic": false,
+          "alignment": "left",
+          "fontsize": 12,
+          "fonttype": "Default Font",
+          "color": "black",
+          "highlight": null
+        }
+      ]
+    },
+    {
+      "type": "image",
+      "filename": "Image_rId10.png"
     },
     {
       "alignment": "center",
@@ -528,7 +1191,9 @@
           "italic": false,
           "alignment": "center",
           "fontsize": 12,
-          "fonttype": "Default Font"
+          "fonttype": "Default Font",
+          "color": "black",
+          "highlight": null
         }
       ]
     },
@@ -542,7 +1207,9 @@
           "italic": false,
           "alignment": "left",
           "fontsize": 12,
-          "fonttype": "Default Font"
+          "fonttype": "Default Font",
+          "color": "black",
+          "highlight": null
         }
       ]
     },
@@ -556,13 +1223,1211 @@
           "italic": false,
           "alignment": "left",
           "fontsize": 12,
-          "fonttype": "Default Font"
+          "fonttype": "Default Font",
+          "color": "black",
+          "highlight": null
         }
       ]
     },
     {
       "type": "image",
-      "filename": "Image_rId10.png"
+      "filename": "Image_rId11.png"
+    },
+    {
+      "alignment": "left",
+      "type": "empty_paragraph1",
+      "content": "",
+      "styling": [
+        {
+          "bold": false,
+          "italic": false,
+          "alignment": "left",
+          "fontsize": 12,
+          "fonttype": "Default Font",
+          "color": "black",
+          "highlight": null
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": "font agency fb here",
+      "runs": [
+        {
+          "type": "text_run",
+          "content": "font ",
+          "styling": {
+            "bold": false,
+            "italic": false,
+            "alignment": "left",
+            "fontsize": 12,
+            "fonttype": "Agency FB",
+            "color": "black",
+            "highlight": null
+          }
+        },
+        {
+          "type": "text_run",
+          "content": "agency fb",
+          "styling": {
+            "bold": false,
+            "italic": false,
+            "alignment": "left",
+            "fontsize": 12,
+            "fonttype": "Agency FB",
+            "color": "black",
+            "highlight": null
+          }
+        },
+        {
+          "type": "text_run",
+          "content": " here",
+          "styling": {
+            "bold": false,
+            "italic": false,
+            "alignment": "left",
+            "fontsize": 12,
+            "fonttype": "Agency FB",
+            "color": "black",
+            "highlight": null
+          }
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": "font comic sans ms here",
+      "runs": [
+        {
+          "type": "text_run",
+          "content": "font ",
+          "styling": {
+            "bold": false,
+            "italic": false,
+            "alignment": "left",
+            "fontsize": 12,
+            "fonttype": "Comic Sans MS",
+            "color": "black",
+            "highlight": null
+          }
+        },
+        {
+          "type": "text_run",
+          "content": "comic sans ",
+          "styling": {
+            "bold": false,
+            "italic": false,
+            "alignment": "left",
+            "fontsize": 12,
+            "fonttype": "Comic Sans MS",
+            "color": "black",
+            "highlight": null
+          }
+        },
+        {
+          "type": "text_run",
+          "content": "ms",
+          "styling": {
+            "bold": false,
+            "italic": false,
+            "alignment": "left",
+            "fontsize": 12,
+            "fonttype": "Comic Sans MS",
+            "color": "black",
+            "highlight": null
+          }
+        },
+        {
+          "type": "text_run",
+          "content": " here",
+          "styling": {
+            "bold": false,
+            "italic": false,
+            "alignment": "left",
+            "fontsize": 12,
+            "fonttype": "Comic Sans MS",
+            "color": "black",
+            "highlight": null
+          }
+        }
+      ]
+    },
+    {
+      "alignment": "left",
+      "type": "empty_paragraph1",
+      "content": "",
+      "styling": [
+        {
+          "bold": false,
+          "italic": false,
+          "alignment": "left",
+          "fontsize": 12,
+          "fonttype": "Default Font",
+          "color": "black",
+          "highlight": null
+        }
+      ]
+    },
+    {
+      "alignment": "left",
+      "type": "empty_paragraph1",
+      "content": "",
+      "styling": [
+        {
+          "bold": false,
+          "italic": true,
+          "alignment": "left",
+          "fontsize": 12,
+          "fonttype": "Default Font",
+          "color": "black",
+          "highlight": null
+        }
+      ]
+    },
+    {
+      "alignment": "left",
+      "type": "empty_paragraph1",
+      "content": "",
+      "styling": [
+        {
+          "bold": false,
+          "italic": true,
+          "alignment": "left",
+          "fontsize": 12,
+          "fonttype": "Default Font",
+          "color": "black",
+          "highlight": null
+        }
+      ]
+    },
+    {
+      "alignment": "left",
+      "type": "empty_paragraph1",
+      "content": "",
+      "styling": [
+        {
+          "bold": false,
+          "italic": true,
+          "alignment": "left",
+          "fontsize": 12,
+          "fonttype": "Default Font",
+          "color": "black",
+          "highlight": null
+        }
+      ]
+    },
+    {
+      "alignment": "left",
+      "type": "empty_paragraph1",
+      "content": "",
+      "styling": [
+        {
+          "bold": false,
+          "italic": true,
+          "alignment": "left",
+          "fontsize": 12,
+          "fonttype": "Default Font",
+          "color": "black",
+          "highlight": null
+        }
+      ]
+    },
+    {
+      "alignment": "left",
+      "type": "empty_paragraph1",
+      "content": "",
+      "styling": [
+        {
+          "bold": false,
+          "italic": false,
+          "alignment": "left",
+          "fontsize": 12,
+          "fonttype": "Default Font",
+          "color": "black",
+          "highlight": null
+        }
+      ]
+    },
+    {
+      "alignment": "left",
+      "type": "empty_paragraph1",
+      "content": "",
+      "styling": [
+        {
+          "bold": false,
+          "italic": true,
+          "alignment": "left",
+          "fontsize": 12,
+          "fonttype": "Default Font",
+          "color": "black",
+          "highlight": null
+        }
+      ]
+    },
+    {
+      "alignment": "left",
+      "type": "empty_paragraph1",
+      "content": "",
+      "styling": [
+        {
+          "bold": false,
+          "italic": true,
+          "alignment": "left",
+          "fontsize": 12,
+          "fonttype": "Default Font",
+          "color": "black",
+          "highlight": null
+        }
+      ]
+    },
+    {
+      "alignment": "left",
+      "type": "empty_paragraph1",
+      "content": "",
+      "styling": [
+        {
+          "bold": false,
+          "italic": true,
+          "alignment": "left",
+          "fontsize": 12,
+          "fonttype": "Default Font",
+          "color": "black",
+          "highlight": null
+        }
+      ]
+    },
+    {
+      "alignment": "left",
+      "type": "empty_paragraph1",
+      "content": "",
+      "styling": [
+        {
+          "bold": false,
+          "italic": false,
+          "alignment": "left",
+          "fontsize": 12,
+          "fonttype": "Default Font",
+          "color": "black",
+          "highlight": null
+        }
+      ]
+    },
+    {
+      "alignment": "left",
+      "type": "page_break",
+      "content": "[PAGE BREAK]",
+      "styling": [
+        {
+          "bold": false,
+          "italic": false,
+          "alignment": "left",
+          "fontsize": 12,
+          "fonttype": "Default Font",
+          "color": "black",
+          "highlight": null
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": "PNG with Align left alignment & In Line with Text position (no move with text or fix position on page)",
+      "runs": [
+        {
+          "type": "text_run",
+          "content": "PNG with Align left alignment & In Line with Text position",
+          "styling": {
+            "bold": false,
+            "italic": false,
+            "alignment": "left",
+            "fontsize": 16,
+            "fonttype": "Aptos Display",
+            "color": "black",
+            "highlight": null
+          }
+        },
+        {
+          "type": "text_run",
+          "content": "(no move with text or fix position on page)",
+          "styling": {
+            "bold": false,
+            "italic": false,
+            "alignment": "left",
+            "fontsize": 16,
+            "fonttype": "Aptos Display",
+            "color": "black",
+            "highlight": null
+          }
+        }
+      ]
+    },
+    {
+      "type": "image",
+      "filename": "Image_rId12.png"
+    },
+    {
+      "type": "paragraph",
+      "content": "Figure 1: PNG",
+      "runs": [
+        {
+          "type": "text_run",
+          "content": "Figure ",
+          "styling": {
+            "bold": false,
+            "italic": true,
+            "alignment": "left",
+            "fontsize": 9,
+            "fonttype": "Aptos",
+            "color": "black",
+            "highlight": null
+          }
+        },
+        {
+          "type": "text_run",
+          "content": "1",
+          "styling": {
+            "bold": false,
+            "italic": true,
+            "alignment": "left",
+            "fontsize": 9,
+            "fonttype": "Aptos",
+            "color": "black",
+            "highlight": null
+          }
+        },
+        {
+          "type": "text_run",
+          "content": ": ",
+          "styling": {
+            "bold": false,
+            "italic": true,
+            "alignment": "left",
+            "fontsize": 9,
+            "fonttype": "Aptos",
+            "color": "black",
+            "highlight": null
+          }
+        },
+        {
+          "type": "text_run",
+          "content": "PNG",
+          "styling": {
+            "bold": false,
+            "italic": true,
+            "alignment": "left",
+            "fontsize": 9,
+            "fonttype": "Aptos",
+            "color": "black",
+            "highlight": null
+          }
+        }
+      ]
+    },
+    {
+      "alignment": "left",
+      "type": "empty_paragraph1",
+      "content": "",
+      "styling": [
+        {
+          "bold": false,
+          "italic": false,
+          "alignment": "left",
+          "fontsize": 9,
+          "fonttype": "Caption",
+          "color": "black",
+          "highlight": null
+        }
+      ]
+    },
+    {
+      "alignment": "left",
+      "type": "page_break",
+      "content": "[PAGE BREAK]",
+      "styling": [
+        {
+          "bold": false,
+          "italic": false,
+          "alignment": "left",
+          "fontsize": 12,
+          "fonttype": "Default Font",
+          "color": "black",
+          "highlight": null
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": "JPG with Align right alignment then enable Through text wrapping",
+      "styling": [
+        {
+          "bold": false,
+          "italic": false,
+          "alignment": "left",
+          "fontsize": 16,
+          "fonttype": "Aptos Display",
+          "color": "black",
+          "highlight": null
+        }
+      ]
+    },
+    {
+      "type": "image",
+      "filename": "Image_rId13.png"
+    },
+    {
+      "type": "paragraph",
+      "content": "Figure 3: JPG",
+      "runs": [
+        {
+          "type": "text_run",
+          "content": "Figure ",
+          "styling": {
+            "bold": false,
+            "italic": true,
+            "alignment": "right",
+            "fontsize": 9,
+            "fonttype": "Aptos",
+            "color": "black",
+            "highlight": null
+          }
+        },
+        {
+          "type": "text_run",
+          "content": "3",
+          "styling": {
+            "bold": false,
+            "italic": true,
+            "alignment": "right",
+            "fontsize": 9,
+            "fonttype": "Aptos",
+            "color": "black",
+            "highlight": null
+          }
+        },
+        {
+          "type": "text_run",
+          "content": ": JPG",
+          "styling": {
+            "bold": false,
+            "italic": true,
+            "alignment": "right",
+            "fontsize": 9,
+            "fonttype": "Aptos",
+            "color": "black",
+            "highlight": null
+          }
+        }
+      ]
+    },
+    {
+      "alignment": "left",
+      "type": "empty_paragraph1",
+      "content": "",
+      "styling": [
+        {
+          "bold": false,
+          "italic": false,
+          "alignment": "left",
+          "fontsize": 12,
+          "fonttype": "Default Font",
+          "color": "black",
+          "highlight": null
+        }
+      ]
+    },
+    {
+      "alignment": "left",
+      "type": "empty_paragraph1",
+      "content": "",
+      "styling": [
+        {
+          "bold": false,
+          "italic": false,
+          "alignment": "left",
+          "fontsize": 12,
+          "fonttype": "Default Font",
+          "color": "black",
+          "highlight": null
+        }
+      ]
+    },
+    {
+      "alignment": "left",
+      "type": "empty_paragraph1",
+      "content": "",
+      "styling": [
+        {
+          "bold": false,
+          "italic": false,
+          "alignment": "left",
+          "fontsize": 12,
+          "fonttype": "Default Font",
+          "color": "black",
+          "highlight": null
+        }
+      ]
+    },
+    {
+      "alignment": "left",
+      "type": "empty_paragraph1",
+      "content": "",
+      "styling": [
+        {
+          "bold": false,
+          "italic": false,
+          "alignment": "left",
+          "fontsize": 12,
+          "fonttype": "Default Font",
+          "color": "black",
+          "highlight": null
+        }
+      ]
+    },
+    {
+      "alignment": "left",
+      "type": "empty_paragraph1",
+      "content": "",
+      "styling": [
+        {
+          "bold": false,
+          "italic": false,
+          "alignment": "left",
+          "fontsize": 12,
+          "fonttype": "Default Font",
+          "color": "black",
+          "highlight": null
+        }
+      ]
+    },
+    {
+      "alignment": "left",
+      "type": "empty_paragraph1",
+      "content": "",
+      "styling": [
+        {
+          "bold": false,
+          "italic": false,
+          "alignment": "left",
+          "fontsize": 12,
+          "fonttype": "Default Font",
+          "color": "black",
+          "highlight": null
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": "JPG with Align right alignment then enable Top & Bottom text wrapping",
+      "styling": [
+        {
+          "bold": false,
+          "italic": false,
+          "alignment": "left",
+          "fontsize": 16,
+          "fonttype": "Aptos Display",
+          "color": "black",
+          "highlight": null
+        }
+      ]
+    },
+    {
+      "type": "image",
+      "filename": "Image_rId13.png"
+    },
+    {
+      "type": "paragraph",
+      "content": "Figure 3: JPG",
+      "runs": [
+        {
+          "type": "text_run",
+          "content": "Figure ",
+          "styling": {
+            "bold": false,
+            "italic": true,
+            "alignment": "right",
+            "fontsize": 9,
+            "fonttype": "Aptos",
+            "color": "black",
+            "highlight": null
+          }
+        },
+        {
+          "type": "text_run",
+          "content": "3",
+          "styling": {
+            "bold": false,
+            "italic": true,
+            "alignment": "right",
+            "fontsize": 9,
+            "fonttype": "Aptos",
+            "color": "black",
+            "highlight": null
+          }
+        },
+        {
+          "type": "text_run",
+          "content": ": JPG",
+          "styling": {
+            "bold": false,
+            "italic": true,
+            "alignment": "right",
+            "fontsize": 9,
+            "fonttype": "Aptos",
+            "color": "black",
+            "highlight": null
+          }
+        }
+      ]
+    },
+    {
+      "alignment": "left",
+      "type": "page_break",
+      "content": "[PAGE BREAK]",
+      "styling": [
+        {
+          "bold": false,
+          "italic": false,
+          "alignment": "left",
+          "fontsize": 12,
+          "fonttype": "Default Font",
+          "color": "black",
+          "highlight": null
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": "JPEG with Justify alignment then enable Behind Text text wrapping",
+      "runs": [
+        {
+          "type": "text_run",
+          "content": "JPEG with Justify alignment then enable Behind Text ",
+          "styling": {
+            "bold": false,
+            "italic": false,
+            "alignment": "left",
+            "fontsize": 16,
+            "fonttype": "Aptos Display",
+            "color": "black",
+            "highlight": null
+          }
+        },
+        {
+          "type": "text_run",
+          "content": "text",
+          "styling": {
+            "bold": false,
+            "italic": false,
+            "alignment": "left",
+            "fontsize": 16,
+            "fonttype": "Aptos Display",
+            "color": "black",
+            "highlight": null
+          }
+        },
+        {
+          "type": "text_run",
+          "content": " wrapping",
+          "styling": {
+            "bold": false,
+            "italic": false,
+            "alignment": "left",
+            "fontsize": 16,
+            "fonttype": "Aptos Display",
+            "color": "black",
+            "highlight": null
+          }
+        }
+      ]
+    },
+    {
+      "type": "image",
+      "filename": "Image_rId14.png"
+    },
+    {
+      "type": "paragraph",
+      "content": "Figure 4: JPEG",
+      "runs": [
+        {
+          "type": "text_run",
+          "content": "Figure ",
+          "styling": {
+            "bold": false,
+            "italic": true,
+            "alignment": "both",
+            "fontsize": 9,
+            "fonttype": "Aptos",
+            "color": "black",
+            "highlight": null
+          }
+        },
+        {
+          "type": "text_run",
+          "content": "4",
+          "styling": {
+            "bold": false,
+            "italic": true,
+            "alignment": "both",
+            "fontsize": 9,
+            "fonttype": "Aptos",
+            "color": "black",
+            "highlight": null
+          }
+        },
+        {
+          "type": "text_run",
+          "content": ": JPEG",
+          "styling": {
+            "bold": false,
+            "italic": true,
+            "alignment": "both",
+            "fontsize": 9,
+            "fonttype": "Aptos",
+            "color": "black",
+            "highlight": null
+          }
+        }
+      ]
+    },
+    {
+      "alignment": "both",
+      "type": "empty_paragraph1",
+      "content": "",
+      "styling": [
+        {
+          "bold": false,
+          "italic": true,
+          "alignment": "both",
+          "fontsize": 12,
+          "fonttype": "Default Font",
+          "color": "black",
+          "highlight": null
+        }
+      ]
+    },
+    {
+      "alignment": "both",
+      "type": "empty_paragraph1",
+      "content": "",
+      "styling": [
+        {
+          "bold": false,
+          "italic": true,
+          "alignment": "both",
+          "fontsize": 12,
+          "fonttype": "Default Font",
+          "color": "black",
+          "highlight": null
+        }
+      ]
+    },
+    {
+      "alignment": "both",
+      "type": "empty_paragraph1",
+      "content": "",
+      "styling": [
+        {
+          "bold": false,
+          "italic": true,
+          "alignment": "both",
+          "fontsize": 12,
+          "fonttype": "Default Font",
+          "color": "black",
+          "highlight": null
+        }
+      ]
+    },
+    {
+      "alignment": "both",
+      "type": "empty_paragraph1",
+      "content": "",
+      "styling": [
+        {
+          "bold": false,
+          "italic": true,
+          "alignment": "both",
+          "fontsize": 12,
+          "fonttype": "Default Font",
+          "color": "black",
+          "highlight": null
+        }
+      ]
+    },
+    {
+      "alignment": "both",
+      "type": "empty_paragraph1",
+      "content": "",
+      "styling": [
+        {
+          "bold": false,
+          "italic": true,
+          "alignment": "both",
+          "fontsize": 12,
+          "fonttype": "Default Font",
+          "color": "black",
+          "highlight": null
+        }
+      ]
+    },
+    {
+      "alignment": "both",
+      "type": "empty_paragraph1",
+      "content": "",
+      "styling": [
+        {
+          "bold": false,
+          "italic": true,
+          "alignment": "both",
+          "fontsize": 12,
+          "fonttype": "Default Font",
+          "color": "black",
+          "highlight": null
+        }
+      ]
+    },
+    {
+      "alignment": "both",
+      "type": "empty_paragraph1",
+      "content": "",
+      "styling": [
+        {
+          "bold": false,
+          "italic": true,
+          "alignment": "both",
+          "fontsize": 12,
+          "fonttype": "Default Font",
+          "color": "black",
+          "highlight": null
+        }
+      ]
+    },
+    {
+      "alignment": "both",
+      "type": "empty_paragraph1",
+      "content": "",
+      "styling": [
+        {
+          "bold": false,
+          "italic": true,
+          "alignment": "both",
+          "fontsize": 12,
+          "fonttype": "Default Font",
+          "color": "black",
+          "highlight": null
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": "JPEG with Justify alignment then enable In Front of Text text wrapping (caption hidden underneath image -> can move image to see)",
+      "runs": [
+        {
+          "type": "text_run",
+          "content": "JPEG with Justify alignment then enable In Front of Text ",
+          "styling": {
+            "bold": false,
+            "italic": false,
+            "alignment": "left",
+            "fontsize": 16,
+            "fonttype": "Aptos Display",
+            "color": "black",
+            "highlight": null
+          }
+        },
+        {
+          "type": "text_run",
+          "content": "text",
+          "styling": {
+            "bold": false,
+            "italic": false,
+            "alignment": "left",
+            "fontsize": 16,
+            "fonttype": "Aptos Display",
+            "color": "black",
+            "highlight": null
+          }
+        },
+        {
+          "type": "text_run",
+          "content": " wrapping (caption hidden underneath image -> can move image to see)",
+          "styling": {
+            "bold": false,
+            "italic": false,
+            "alignment": "left",
+            "fontsize": 16,
+            "fonttype": "Aptos Display",
+            "color": "black",
+            "highlight": null
+          }
+        }
+      ]
+    },
+    {
+      "type": "image",
+      "filename": "Image_rId14.png"
+    },
+    {
+      "type": "paragraph",
+      "content": "Figure 4: JPEG",
+      "runs": [
+        {
+          "type": "text_run",
+          "content": "Figure ",
+          "styling": {
+            "bold": false,
+            "italic": true,
+            "alignment": "both",
+            "fontsize": 9,
+            "fonttype": "Aptos",
+            "color": "black",
+            "highlight": null
+          }
+        },
+        {
+          "type": "text_run",
+          "content": "4",
+          "styling": {
+            "bold": false,
+            "italic": true,
+            "alignment": "both",
+            "fontsize": 9,
+            "fonttype": "Aptos",
+            "color": "black",
+            "highlight": null
+          }
+        },
+        {
+          "type": "text_run",
+          "content": ": JPEG",
+          "styling": {
+            "bold": false,
+            "italic": true,
+            "alignment": "both",
+            "fontsize": 9,
+            "fonttype": "Aptos",
+            "color": "black",
+            "highlight": null
+          }
+        }
+      ]
+    },
+    {
+      "alignment": "left",
+      "type": "empty_paragraph1",
+      "content": "",
+      "styling": [
+        {
+          "bold": false,
+          "italic": false,
+          "alignment": "left",
+          "fontsize": 12,
+          "fonttype": "Default Font",
+          "color": "black",
+          "highlight": null
+        }
+      ]
+    },
+    {
+      "alignment": "left",
+      "type": "empty_paragraph1",
+      "content": "",
+      "styling": [
+        {
+          "bold": false,
+          "italic": false,
+          "alignment": "left",
+          "fontsize": 12,
+          "fonttype": "Default Font",
+          "color": "black",
+          "highlight": null
+        }
+      ]
+    },
+    {
+      "alignment": "left",
+      "type": "empty_paragraph1",
+      "content": "",
+      "styling": [
+        {
+          "bold": false,
+          "italic": false,
+          "alignment": "left",
+          "fontsize": 12,
+          "fonttype": "Default Font",
+          "color": "black",
+          "highlight": null
+        }
+      ]
+    },
+    {
+      "alignment": "left",
+      "type": "page_break",
+      "content": "[PAGE BREAK]",
+      "styling": [
+        {
+          "bold": false,
+          "italic": false,
+          "alignment": "left",
+          "fontsize": 12,
+          "fonttype": "Default Font",
+          "color": "black",
+          "highlight": null
+        }
+      ]
+    },
+    {
+      "alignment": "left",
+      "type": "page_break",
+      "content": "[PAGE BREAK]",
+      "styling": [
+        {
+          "bold": false,
+          "italic": false,
+          "alignment": "left",
+          "fontsize": 12,
+          "fonttype": "Default Font",
+          "color": "black",
+          "highlight": null
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": "- - This is a Page Break - -",
+      "styling": [
+        {
+          "bold": false,
+          "italic": false,
+          "alignment": "left",
+          "fontsize": 12,
+          "fonttype": "Aptos",
+          "color": "black",
+          "highlight": null
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": "-- Next Page Section Break --",
+      "styling": [
+        {
+          "bold": false,
+          "italic": false,
+          "alignment": "left",
+          "fontsize": 12,
+          "fonttype": "Aptos",
+          "color": "black",
+          "highlight": null
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": "-- Continuous Section Break - -",
+      "styling": [
+        {
+          "bold": false,
+          "italic": false,
+          "alignment": "left",
+          "fontsize": 12,
+          "fonttype": "Aptos",
+          "color": "black",
+          "highlight": null
+        }
+      ]
+    },
+    {
+      "alignment": "left",
+      "type": "empty_paragraph1",
+      "content": "",
+      "styling": [
+        {
+          "bold": false,
+          "italic": false,
+          "alignment": "left",
+          "fontsize": 12,
+          "fonttype": "Default Font",
+          "color": "black",
+          "highlight": null
+        }
+      ]
+    },
+    {
+      "alignment": "left",
+      "type": "empty_paragraph1",
+      "content": "",
+      "styling": [
+        {
+          "bold": false,
+          "italic": false,
+          "alignment": "left",
+          "fontsize": 12,
+          "fonttype": "Default Font",
+          "color": "black",
+          "highlight": null
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": "This is citation/references",
+      "styling": [
+        {
+          "bold": false,
+          "italic": false,
+          "alignment": "left",
+          "fontsize": 12,
+          "fonttype": "Aptos",
+          "color": "black",
+          "highlight": null
+        }
+      ]
+    },
+    {
+      "alignment": "left",
+      "type": "page_break",
+      "content": "[PAGE BREAK]",
+      "styling": [
+        {
+          "bold": false,
+          "italic": false,
+          "alignment": "left",
+          "fontsize": 12,
+          "fonttype": "Default Font",
+          "color": "black",
+          "highlight": null
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": "This is an Endnote",
+      "styling": [
+        {
+          "bold": false,
+          "italic": false,
+          "alignment": "left",
+          "fontsize": 12,
+          "fonttype": "Aptos",
+          "color": "black",
+          "highlight": null
+        }
+      ]
+    },
+    {
+      "alignment": "left",
+      "type": "empty_paragraph1",
+      "content": "",
+      "styling": [
+        {
+          "bold": false,
+          "italic": false,
+          "alignment": "left",
+          "fontsize": 12,
+          "fonttype": "Default Font",
+          "color": "black",
+          "highlight": null
+        }
+      ]
     }
   ]
 }
